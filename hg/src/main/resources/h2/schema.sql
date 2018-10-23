@@ -1,0 +1,252 @@
+-- create database trace default character set utf8mb4 collate utf8mb4_unicode_ci;
+
+create table category
+(
+  id   int auto_increment   primary key,
+  name varchar(256) not null,
+  constraint category_id_uindex  unique (id)
+) ENGINE = InnoDB DEFAULT CHARSET=utf8mb4;
+
+create table `farm`
+(
+  id         int auto_increment    primary key,
+  address    varchar(256) null,
+  village_id int                       null,
+  owner_id   int                       null,
+  goods_id1  int                       null,
+  goods_id2  int                       null,
+  goods_id3  int                       null,
+  constraint farm_id_uindex  unique (id)
+) ENGINE = InnoDB DEFAULT CHARSET=utf8mb4;
+
+create table `goods`
+(
+  id   int auto_increment    primary key,
+  name varchar(256) not null,
+  image_url varchar(1024),
+  constraint goods_id_uindex  unique (id)
+) ENGINE = InnoDB DEFAULT CHARSET=utf8mb4;
+
+create table `trace_info`
+(
+  id int auto_increment primary key ,
+  goods_id int not null,
+  report_id int null,
+  origin_address varchar(256) null,
+  farm varchar(128),
+  product_date date null,
+  create_time datetime,
+  constraint traceinfo_id_uindex unique (id)
+) engine = InnoDB DEFAULT CHARSET=utf8mb4;
+
+create table `company`
+(
+  id   int auto_increment
+    primary key,
+  name varchar(256) not null unique ,
+  address varchar(256),
+  owner varchar(20) comment '法人',
+  telephone varchar(20),
+  constraint company_id_uindex
+  unique (id)
+) ENGINE = InnoDB DEFAULT CHARSET=utf8mb4;
+
+create table `order`
+(
+  id         int auto_increment    primary key,
+  goods_id   int                       not null  comment '采购商品ID',
+  order_time datetime                  not null  comment '采购时间',
+  quantity     int                      not null  comment '数量',
+  unit varchar(26)                     not null comment '单位',
+  price int comment '分/kg',
+  address    varchar(256) null  comment '采购地点',
+  seller_id  int                       null,
+  buyer_id   int                       null,
+  report_id  int                       null comment '质检报告ID',
+  plant_id   bigint comment '种植计划ID',
+  pick_id bigint comment '种植条目中对应的采摘ID',
+  constraint order_id_uindex  unique (id)
+)  DEFAULT CHARSET=utf8mb4;
+
+create table `person`
+(
+  id             int auto_increment
+    primary key,
+  name           varchar(64)  not null,
+  type int default 10 comment  '1-农户 2-采购商 3-司机 10-其他',
+  gender         varchar(64)  null,
+  birthday       date         null,
+  id_card        varchar(64)  null
+  comment '身份证',
+  family_address varchar(256) null
+  comment '家庭住址',
+  mobile_no      varchar(64)  null
+  comment '手机号码',
+  company        varchar(256) null
+  comment '公司',
+  constraint person_id_uindex
+  unique (id)
+) ENGINE = InnoDB DEFAULT CHARSET=utf8mb4;
+
+CREATE TABLE `region` (
+  `id` bigint auto_increment primary key,
+  `name` varchar(50) NOT NULL COMMENT '地区名称',
+  `short_name` varchar(10) DEFAULT NULL COMMENT '地区缩写',
+  `code` varchar(20) DEFAULT NULL COMMENT '行政地区编号',
+  `parent_id` bigint DEFAULT NULL COMMENT '地区父id',
+  `level` int(2) DEFAULT NULL COMMENT '地区级别 1-省、自治区、直辖市 2-地级市、地区、自治州、盟 3-市辖区、县级市、县',
+  constraint region_id_uindex
+  unique (id)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+
+create table `quality_report`
+(
+  id          bigint auto_increment primary key,
+  title varchar(256)        not null comment '标题',
+  report_date date          not null comment '报告时间',
+  goods_id    int unsigned  null comment '送检商品ID',
+  origin      varchar(256)  null comment '产地',
+  org_name    varchar(1024) null comment '检验单位名称',
+  path        varchar(1024) not null comment '质检报告文件地址',
+  create_time datetime      not null default current_timestamp comment '创建时间',
+  description varchar(1024) null comment '说明',
+  constraint quality_report_id_uindex
+  unique (id)
+) ENGINE = InnoDB DEFAULT CHARSET=utf8mb4;
+
+create table qualification
+(
+  id          int auto_increment
+    primary key,
+  company_id int                       null
+  comment '公司ID',
+  path        varchar(1024)              not null
+  comment '资质证书地址',
+  constraint qualification_id_uindex
+  unique (id)
+) ENGINE = InnoDB DEFAULT CHARSET=utf8mb4;
+
+
+create table village
+(
+  id      int auto_increment
+    primary key,
+  name    varchar(256) not null,
+  town_id int                       not null,
+  constraint village_id_uindex
+  unique (id)
+) ENGINE = InnoDB DEFAULT CHARSET=utf8mb4;
+
+
+create table `plant`
+(
+  id bigint auto_increment primary key ,
+  farmer_id int not null comment '种植人ID',
+  goods_id int not null comment '农作物ID',
+  year int not null comment '种植年',
+  start_date date default null comment '种植计划开始时间',
+  address varchar(256) default null comment '地点',
+  create_time timestamp not null default current_timestamp comment '记录创建时间',
+  constraint plant_id_uindex unique (id)
+) ENGINE = InnoDB default charset=utf8mb4;
+
+create table `plant_item`
+(
+  id bigint auto_increment primary key ,
+  plant_id bigint not null comment '种植计划ID',
+  action_type int not null comment '类型: 0：育苗, 1:施肥，2：灌溉，3：用药，4：授粉，5：采摘，10：其他',
+  action_farmer_id int default null comment '实施人ID',
+  action_date date not null comment '实施时间',
+  action_content varchar(256) comment '内容',
+  create_time timestamp  not null DEFAULT CURRENT_TIMESTAMP,
+  constraint plant_item_id_uindex unique (id)
+) ENGINE = InnoDB default charset=utf8mb4;
+
+create table `plant_action_type`
+(
+  id integer auto_increment primary key ,
+  name varchar(20) not null
+) ENGINE = InnoDB default charset=utf8mb4;
+
+create table sys_role
+(
+  id   int auto_increment,
+  name varchar(64) not null
+    primary key,
+  constraint role_id_uindex
+  unique (id)
+) ENGINE = InnoDB DEFAULT CHARSET=utf8mb4;
+
+create table town
+(
+  id   int auto_increment
+    primary key,
+  name varchar(1024) not null,
+  constraint town_id_uindex
+  unique (id)
+) ENGINE = InnoDB DEFAULT CHARSET=utf8mb4;
+
+create table waybill
+(
+  id int auto_increment primary key,
+  driver_name varchar(64) null comment '司机姓名',
+  driver_phone varchar(64) null comment '司机手机号',
+  plate_number varchar(64) null comment '车牌号',
+  start_time timestamp not null comment '起始时间',
+  start_location varchar(256) not null comment '起始地点',
+  end_time timestamp null comment '终止时间',
+  end_location varchar(256) null comment '终止地点',
+  order_id int not null comment '订单号',
+  constraint waybill_id_uindex unique(id)
+) ENGINE = InnoDB DEFAULT CHARSET=utf8mb4;
+
+
+create table sys_user
+(
+  id                  int auto_increment
+    primary key,
+  name                varchar(64) unique                 not null,
+  password            varchar(256)                       not null,
+  email               varchar(256)                           null,
+  enabled             tinyint(1) default '1'                 null
+  comment '账号是否生效',
+  create_time         datetime                               null
+  comment '账号创建时间',
+  password_reset_time datetime                               null
+  comment '最近一次密码重置时间',
+  expired_time        datetime default '2099-01-01 00:00:00' not null
+  comment '账号过期时间',
+  person_id           int                                    null
+  comment '个人ID（用户资料表person）',
+  constraint user_id_uindex
+  unique (id),
+  constraint user_name_uindex
+  unique (name)
+) ENGINE = InnoDB DEFAULT CHARSET=utf8mb4;
+
+create table sys_user_role
+(
+  id integer primary key ,
+  username        varchar(56)     unique not null,
+  role_name       varchar(1024)   ,
+  update_time     timestamp default current_timestamp
+) ENGINE = InnoDB DEFAULT CHARSET=utf8mb4;
+
+create table `image_category` (
+  id integer primary key auto_increment,
+  name varchar(26) not null,
+  profile_type tinyint not null default 0 comment '0:online 1:dev',
+  local_path varchar(256) not null ,
+  url_path varchar(256) not null,
+  description varchar(256)
+) engine = InnoDB DEFAULT CHARSET = utf8mb4;
+
+create table `image` (
+  id integer auto_increment primary key ,
+  cat_id integer not null,
+  name varchar(256) not null unique ,
+  local_path varchar(1024) not null,
+  url_path varchar(1024) not null,
+  create_time timestamp default current_timestamp
+) engine = InnoDB DEFAULT CHARSET = utf8mb4;

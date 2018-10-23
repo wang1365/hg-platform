@@ -1,0 +1,49 @@
+server:
+  port: 8080
+  context-path: /
+
+logging:
+  path: /root/trace/log/
+  level:
+    root: INFO
+
+spring:
+  profiles.active: online
+  application.name: trace
+  messages:
+    basename: i18n/messages, i18n/messages_zh
+  mvc.static-path-pattern: /resources/**
+  resources.static-locations:
+    - classpath:/META-INF/resources/
+    - classpath:/resources/
+    - classpath:/static/
+    - classpath:/public/
+    - file:${trace.static.upload}
+  http:
+    multipart:
+      maxFileSize: 20MB
+      maxRequestSize: 20MB
+
+management:
+  security:
+#    roles: ADMIN
+#    enable: false
+
+mybatis:
+  config-location: classpath:mybatis/mybatis-config.xml
+  mapper-locations: classpath:mybatis/mapper/*.xml
+
+trace:
+  # 质检报告文件保存路径
+  static:
+    upload: /root/trace/static/upload/
+
+
+---
+spring:
+  profiles: online
+  datasource:
+    driver-class-name: com.mysql.jdbc.Driver
+    url: jdbc:mysql://172.16.114.190:3306/trace?useUnicode=true&characterEncoding=utf8
+    username: root
+    password: Guolongcang123456--

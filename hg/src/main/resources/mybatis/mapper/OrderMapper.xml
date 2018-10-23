@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.xiaochuan.web.repository.OrderMapper">
+  <resultMap id="BaseResultMap" type="com.xiaochuan.web.entity.Order">
+    <id column="id" jdbcType="INTEGER" property="id"/>
+    <result column="goods_id" jdbcType="INTEGER" property="goodsId"/>
+    <result column="order_time" jdbcType="TIMESTAMP" property="orderTime"/>
+    <result column="quantity" jdbcType="INTEGER" property="quantity"/>
+    <result column="unit" jdbcType="VARCHAR" property="unit"/>
+    <result column="address" jdbcType="VARCHAR" property="address"/>
+    <result column="seller_id" jdbcType="INTEGER" property="sellerId"/>
+    <result column="buyer_id" jdbcType="INTEGER" property="buyerId"/>
+    <result column="report_id" jdbcType="INTEGER" property="reportId"/>
+    <result column="plant_id" jdbcType="BIGINT" property="plantId"/>
+    <result column="pick_plant_item_id" jdbcType="BIGINT" property="pickPlantItemId"/>
+  </resultMap>
+
+  <sql id="Columns">
+    id, goods_id, order_time, quantity, unit, address, seller_id, buyer_id, report_id,
+    plant_id, pick_plant_item_id
+  </sql>
+
+  <sql id="Columns_No_Id">
+    goods_id, order_time, quantity, unit, address, seller_id, buyer_id, report_id,
+    plant_id, pick_plant_item_id
+  </sql>
+
+  <select id="select" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select
+    <include refid="Columns"/>
+    from `order`
+  </select>
+
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select
+    <include refid="Columns"/>
+    from `order`
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from `order`
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+
+  <insert id="insert" parameterType="com.xiaochuan.web.entity.Order">
+    <selectKey keyProperty="id" order="BEFORE" resultType="java.lang.Integer">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into `order` (<include refid="Columns_No_Id"/>)
+    values (
+    #{goodsId,jdbcType=INTEGER}, #{orderTime,jdbcType=TIMESTAMP}, #{quantity,jdbcType=INTEGER},
+    #{unit,jdbcType=VARCHAR}, #{address,jdbcType=VARCHAR}, #{sellerId,jdbcType=INTEGER},
+    #{buyerId,jdbcType=INTEGER}, #{reportId,jdbcType=INTEGER},
+    #{plantId,jdbcType=BIGINT}, #{pickId,jdbcType=BIGINT})
+  </insert>
+
+  <update id="updateByPrimaryKeySelective" parameterType="com.xiaochuan.web.entity.Order">
+    update `order`
+    <set>
+      <if test="goodsId != null">
+        goods_id = #{goodsId,jdbcType=INTEGER},
+      </if>
+      <if test="orderTime != null">
+        order_time = #{orderTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="quantity != null">
+        quantity = #{quantity,jdbcType=INTEGER},
+      </if>
+      <if test="unit != null">
+        unit = #{unit,jdbcType=VARCHAR},
+      </if>
+      <if test="address != null">
+        address = #{address,jdbcType=VARCHAR},
+      </if>
+      <if test="sellerId != null">
+        seller_id = #{sellerId,jdbcType=INTEGER},
+      </if>
+      <if test="buyerId != null">
+        buyer_id = #{buyerId,jdbcType=INTEGER},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+
+  <update id="updateByPrimaryKey" parameterType="com.xiaochuan.web.entity.Order">
+    update order
+    set goods_id = #{goodsId,jdbcType=INTEGER},
+      order_time = #{orderTime,jdbcType=TIMESTAMP},
+      quantity = #{quantity,jdbcType=INTEGER},
+      unit = #{unit,jdbcType=VARCHAR},
+      address = #{address,jdbcType=VARCHAR},
+      seller_id = #{sellerId,jdbcType=INTEGER},
+      buyer_id = #{buyerId,jdbcType=INTEGER}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

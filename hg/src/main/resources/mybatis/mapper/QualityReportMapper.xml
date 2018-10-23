@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.xiaochuan.web.repository.QualityReportMapper">
+  <resultMap id="QualityReport" type="com.xiaochuan.web.entity.QualityReport">
+    <!--<constructor>-->
+      <!--<idArg column="id" javaType="int"/>-->
+    <!--</constructor>-->
+    <id column="id" property="id"/>
+    <result column="goods_id" property="goodsId"/>
+    <result column="org_name" property="orgName"/>
+    <result column="title" property="title"/>
+    <result column="description" property="description"/>
+    <result column="path" property="path"/>
+    <result column="origin" property="origin"/>
+    <result column="report_date" property="reportDate"/>
+    <result column="create_time" property="createTime"/>
+    <association property="goods" javaType="Goods">
+      <id property="id" column="goodsId" />
+      <result property="name" column="name"/>
+    </association>
+
+  </resultMap>
+
+  <sql id="all_column">
+    id,
+    title,
+    goods_id,
+    org_name,
+    origin,
+    org_name,
+    path,
+    description,
+    report_date,
+    create_time
+  </sql>
+
+  <insert id="insert">
+    <selectKey keyProperty="id" order="BEFORE" resultType="java.lang.Integer">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    INSERT INTO quality_report
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="pojo.goods.id != null">goods_id,</if>
+      <if test="pojo.orgName != null">org_name,</if>
+      <if test="pojo.title != null">title,</if>
+      <if test="pojo.path != null">path,</if>
+      <if test="pojo.origin != null">origin,</if>
+      <if test="pojo.createTime != null">create_time,</if>
+      <if test="pojo.reportDate != null">report_date,</if>
+      <if test="pojo.description != null">description,</if>
+    </trim>
+    VALUES
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="pojo.goods.id != null">#{pojo.goods.id},</if>
+      <if test="pojo.orgName != null">#{pojo.orgName},</if>
+      <if test="pojo.title != null">#{pojo.title},</if>
+      <if test="pojo.path != null">#{pojo.path},</if>
+      <if test="pojo.origin != null">#{pojo.origin},</if>
+      <if test="pojo.createTime != null">#{pojo.createTime},</if>
+      <if test="pojo.reportDate != null">#{pojo.reportDate},</if>
+      <if test="pojo.description != null">#{pojo.description},</if>
+    </trim>
+  </insert>
+
+
+
+  <select id="selectAll" resultMap="QualityReport">
+    SELECT
+      t1.id,
+      t1.title,
+      t1.org_name,
+      t1.path,
+      t1.origin,
+      t1.description,
+      t1.report_date,
+      t1.create_time,
+      t2.id as goodsId,
+      t2.name
+    FROM quality_report t1 left join goods t2 on t1.goods_id = t2.id
+  </select>
+
+  <select id="select" resultMap="QualityReport">
+    SELECT
+    <include refid="all_column"/>
+    FROM quality_report
+    <!--<if test="pojo != null">-->
+    <where>
+      <if test="pojo.id != null">AND id = #{pojo.id}</if>
+      <if test="pojo.goodsId != null">AND goods_id = #{pojo.goodsId}</if>
+      <if test="pojo.orgName != null">AND org_name = #{pojo.orgName}</if>
+      <if test="pojo.title != null">AND title = #{pojo.title}</if>
+      <if test="pojo.path != null">AND path = #{pojo.path}</if>
+    </where>
+    <!--</if>-->
+    LIMIT 1000
+  </select>
+
+  <select id="selectById" resultMap="QualityReport">
+    SELECT
+      t1.id,
+      t1.title,
+      t1.org_name,
+      t1.path,
+      t1.origin,
+      t1.description,
+      t1.report_date,
+      t1.create_time,
+      t2.id as goodsId,
+      t2.name
+    FROM quality_report t1 left join goods t2 on t1.goods_id = t2.id
+    WHERE t1.id = #{id}
+  </select>
+
+  <delete id="delete">
+    DELETE FROM quality_report where id = #{id}
+  </delete>
+</mapper>
