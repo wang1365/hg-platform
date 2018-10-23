@@ -1,23 +1,19 @@
 -- create database trace default character set utf8mb4 collate utf8mb4_unicode_ci;
 
-create table category
+-- 商品分类
+create table goods_category
 (
   id   int auto_increment   primary key,
-  name varchar(256) not null,
-  constraint category_id_uindex  unique (id)
+  name varchar(256) not null unique
 ) ENGINE = InnoDB DEFAULT CHARSET=utf8mb4;
 
-create table `farm`
+-- 商品品牌
+create table goods_brand
 (
-  id         int auto_increment    primary key,
-  address    varchar(256) null,
-  village_id int                       null,
-  owner_id   int                       null,
-  goods_id1  int                       null,
-  goods_id2  int                       null,
-  goods_id3  int                       null,
-  constraint farm_id_uindex  unique (id)
+  id   int auto_increment   primary key,
+  name varchar(256) not null unique
 ) ENGINE = InnoDB DEFAULT CHARSET=utf8mb4;
+
 
 create table `goods`
 (
@@ -26,18 +22,6 @@ create table `goods`
   image_url varchar(1024),
   constraint goods_id_uindex  unique (id)
 ) ENGINE = InnoDB DEFAULT CHARSET=utf8mb4;
-
-create table `trace_info`
-(
-  id int auto_increment primary key ,
-  goods_id int not null,
-  report_id int null,
-  origin_address varchar(256) null,
-  farm varchar(128),
-  product_date date null,
-  create_time datetime,
-  constraint traceinfo_id_uindex unique (id)
-) engine = InnoDB DEFAULT CHARSET=utf8mb4;
 
 create table `company`
 (
@@ -99,76 +83,6 @@ CREATE TABLE `region` (
   unique (id)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
-
-create table `quality_report`
-(
-  id          bigint auto_increment primary key,
-  title varchar(256)        not null comment '标题',
-  report_date date          not null comment '报告时间',
-  goods_id    int unsigned  null comment '送检商品ID',
-  origin      varchar(256)  null comment '产地',
-  org_name    varchar(1024) null comment '检验单位名称',
-  path        varchar(1024) not null comment '质检报告文件地址',
-  create_time datetime      not null default current_timestamp comment '创建时间',
-  description varchar(1024) null comment '说明',
-  constraint quality_report_id_uindex
-  unique (id)
-) ENGINE = InnoDB DEFAULT CHARSET=utf8mb4;
-
-create table qualification
-(
-  id          int auto_increment
-    primary key,
-  company_id int                       null
-  comment '公司ID',
-  path        varchar(1024)              not null
-  comment '资质证书地址',
-  constraint qualification_id_uindex
-  unique (id)
-) ENGINE = InnoDB DEFAULT CHARSET=utf8mb4;
-
-
-create table village
-(
-  id      int auto_increment
-    primary key,
-  name    varchar(256) not null,
-  town_id int                       not null,
-  constraint village_id_uindex
-  unique (id)
-) ENGINE = InnoDB DEFAULT CHARSET=utf8mb4;
-
-
-create table `plant`
-(
-  id bigint auto_increment primary key ,
-  farmer_id int not null comment '种植人ID',
-  goods_id int not null comment '农作物ID',
-  year int not null comment '种植年',
-  start_date date default null comment '种植计划开始时间',
-  address varchar(256) default null comment '地点',
-  create_time timestamp not null default current_timestamp comment '记录创建时间',
-  constraint plant_id_uindex unique (id)
-) ENGINE = InnoDB default charset=utf8mb4;
-
-create table `plant_item`
-(
-  id bigint auto_increment primary key ,
-  plant_id bigint not null comment '种植计划ID',
-  action_type int not null comment '类型: 0：育苗, 1:施肥，2：灌溉，3：用药，4：授粉，5：采摘，10：其他',
-  action_farmer_id int default null comment '实施人ID',
-  action_date date not null comment '实施时间',
-  action_content varchar(256) comment '内容',
-  create_time timestamp  not null DEFAULT CURRENT_TIMESTAMP,
-  constraint plant_item_id_uindex unique (id)
-) ENGINE = InnoDB default charset=utf8mb4;
-
-create table `plant_action_type`
-(
-  id integer auto_increment primary key ,
-  name varchar(20) not null
-) ENGINE = InnoDB default charset=utf8mb4;
-
 create table sys_role
 (
   id   int auto_increment,
@@ -185,20 +99,6 @@ create table town
   name varchar(1024) not null,
   constraint town_id_uindex
   unique (id)
-) ENGINE = InnoDB DEFAULT CHARSET=utf8mb4;
-
-create table waybill
-(
-  id int auto_increment primary key,
-  driver_name varchar(64) null comment '司机姓名',
-  driver_phone varchar(64) null comment '司机手机号',
-  plate_number varchar(64) null comment '车牌号',
-  start_time timestamp not null comment '起始时间',
-  start_location varchar(256) not null comment '起始地点',
-  end_time timestamp null comment '终止时间',
-  end_location varchar(256) null comment '终止地点',
-  order_id int not null comment '订单号',
-  constraint waybill_id_uindex unique(id)
 ) ENGINE = InnoDB DEFAULT CHARSET=utf8mb4;
 
 

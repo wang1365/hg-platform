@@ -34,32 +34,9 @@ insert into `region` values (370783003000, '文家街道', null, '370783000000',
 insert into `region` values (370783003001, '文家庄', null, null, 370783003000, 5);
 insert into `region` values (370783003002, '桑家庄', null, null, 370783003000, 5);
 
--- 种植行为类型
-insert into `plant_action_type` values (1, '播种');
-insert into `plant_action_type` values (2, '育苗');
-insert into `plant_action_type` values (3, '施肥');
-insert into `plant_action_type` values (4, '灌溉');
-insert into `plant_action_type` values (5, '杀虫');
-insert into `plant_action_type` values (6, '喷药');
-insert into `plant_action_type` values (7, '授粉');
-insert into `plant_action_type` values (8, '采摘');
-insert into `plant_action_type` values (20, '其他');
-
--- 种植计划
-insert into `plant` values (1, 1, 1, 2018, '2018-09-08', '寿光市文家街道桑家村', current_timestamp );
-
--- 种植计划详情
-insert into `plant_item` values (1, 1, 1, 1, '2018-03-12', '育苗3000株', current_timestamp );
-insert into `plant_item` values (2, 1, 5, 1, '2018-07-08', '喷洒杀虫剂100g', current_timestamp );
-insert into `plant_item` values (3, 1, 8, 1, '2018-10-11', '采摘500斤', current_timestamp );
-
-
 
 -- 订单
 insert into `order` values (1, 1, '2018-09-25', 1500, 'kg', 120, '南京市雨花台区', 1, 1, 1, 1, null);
-
--- 运单
-insert into waybill values (1, '赵为民', '13770820642', '鲁A12345', '2018-09-25 10:02:00', '山东省寿光市文家街道', '2018-09-25 12:02:00', '山东省寿光市蔬菜交易市场', 1);
 
 -- 图片
 insert into `image_category` values (1, '质检报告', 0, '/root/trace/static/upload', 'http://www.tiaocaishi.com:9527/resources', '');

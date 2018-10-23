@@ -17,15 +17,6 @@ public class OrderDTO extends Order {
     private String sellerName;
     private String buyerName;
 
-    /**
-     * 关联的生产计划
-     */
-    private PlantDTO plantDTO;
-    /**
-     * 采摘信息（每个订单必须关联一个采摘信息）
-     */
-    private PlantItemDTO pickDTO;
-
     private String summary;
 
     public String getSummary() {
