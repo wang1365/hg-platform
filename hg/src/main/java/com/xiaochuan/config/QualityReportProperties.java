@@ -11,7 +11,7 @@ import javax.validation.constraints.NotNull;
  * @version 1.0.0
  * @date 2018/8/21 15:10
  */
-@ConfigurationProperties("trace.static")
+@ConfigurationProperties("hg.static")
 @Validated
 @Data
 public class QualityReportProperties {

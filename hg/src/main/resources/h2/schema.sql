@@ -1,4 +1,4 @@
--- create database trace default character set utf8mb4 collate utf8mb4_unicode_ci;
+-- create database hg default character set utf8mb4 collate utf8mb4_unicode_ci;
 
 -- 商品分类
 create table goods_category

@@ -3,13 +3,13 @@ server:
   context-path: /
 
 logging:
-  path: /root/trace/log/
+  path: /root/hg/log/
   level:
     root: INFO
 
 spring:
   profiles.active: online
-  application.name: trace
+  application.name: hg
   messages:
     basename: i18n/messages, i18n/messages_zh
   mvc.static-path-pattern: /resources/**
@@ -18,7 +18,7 @@ spring:
     - classpath:/resources/
     - classpath:/static/
     - classpath:/public/
-    - file:${trace.static.upload}
+    - file:${hg.static.upload}
   http:
     multipart:
       maxFileSize: 20MB
@@ -33,10 +33,10 @@ mybatis:
   config-location: classpath:mybatis/mybatis-config.xml
   mapper-locations: classpath:mybatis/mapper/*.xml
 
-trace:
+hg:
   # 质检报告文件保存路径
   static:
-    upload: /root/trace/static/upload/
+    upload: /root/hg/static/upload/
 
 
 ---
@@ -44,6 +44,6 @@ spring:
   profiles: online
   datasource:
     driver-class-name: com.mysql.jdbc.Driver
-    url: jdbc:mysql://172.16.114.190:3306/trace?useUnicode=true&characterEncoding=utf8
+    url: jdbc:mysql://172.16.114.190:3306/hg?useUnicode=true&characterEncoding=utf8
     username: root
     password: Guolongcang123456--

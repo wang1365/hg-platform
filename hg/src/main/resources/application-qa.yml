@@ -9,7 +9,7 @@ logging:
 
 spring:
   datasource:
-    url: jdbc:h2:mem:trace
+    url: jdbc:h2:mem:hg
     username: root
     password: changeme
     driver-class-name: org.h2.Driver
