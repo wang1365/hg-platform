@@ -4,7 +4,8 @@
 create table goods_category
 (
   id   int auto_increment   primary key,
-  name varchar(256) not null unique
+  name varchar(256) not null unique,
+  desc varchar(1024)
 ) ENGINE = InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- 商品品牌
@@ -18,9 +19,8 @@ create table goods_brand
 create table `goods`
 (
   id   int auto_increment    primary key,
-  name varchar(256) not null,
-  image_url varchar(1024),
-  constraint goods_id_uindex  unique (id)
+  name varchar(256) not null unique,
+  desc varchar(1024)
 ) ENGINE = InnoDB DEFAULT CHARSET=utf8mb4;
 
 create table `company`

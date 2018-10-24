@@ -16,5 +16,5 @@ public class Goods {
     @TableId(value = "id", type= IdType.AUTO)
     private Integer id;
     private String name;
-    private String imageUrl;
+    private String desc;
 }
