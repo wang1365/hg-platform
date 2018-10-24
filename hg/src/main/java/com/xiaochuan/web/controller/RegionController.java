@@ -1,6 +1,6 @@
 package com.xiaochuan.web.controller;
 
-import com.xiaochuan.web.common.TraceResponse;
+import com.xiaochuan.web.common.HgResponse;
 import com.xiaochuan.web.entity.Region;
 import com.xiaochuan.web.service.RegionSersvice;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -25,12 +25,12 @@ public class RegionController {
     }
 
     @GetMapping("/list")
-    TraceResponse<List<Region>> getRegions(@RequestParam(defaultValue = "-1") Long parentId,
-                                           @RequestParam Integer level) {
+    HgResponse<List<Region>> getRegions(@RequestParam(defaultValue = "-1") Long parentId,
+                                        @RequestParam Integer level) {
         if (parentId == -1) {
             parentId = null;
         }
         List<Region> regions = regionSersvice.getRegions(parentId, level);
-        return TraceResponse.success(regions);
+        return HgResponse.success(regions);
     }
 }

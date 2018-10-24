@@ -1,6 +1,6 @@
 package com.xiaochuan.web.controller;
 
-import com.xiaochuan.web.common.TraceResponse;
+import com.xiaochuan.web.common.HgResponse;
 import com.xiaochuan.web.entity.Person;
 import com.xiaochuan.web.service.PersonService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,41 +22,41 @@ public class PersonController {
     private PersonService personService;
 
     @GetMapping("getPersonList")
-    TraceResponse<List<Person>> getPersonList() {
-        return TraceResponse.success(personService.getAllPersons());
+    HgResponse<List<Person>> getPersonList() {
+        return HgResponse.success(personService.getAllPersons());
     }
 
     @GetMapping("getPersonListByType")
-    TraceResponse<List<Person>> getPersonListByType(@RequestParam int type) {
-        return TraceResponse.success(personService.getPersonListByType(type));
+    HgResponse<List<Person>> getPersonListByType(@RequestParam int type) {
+        return HgResponse.success(personService.getPersonListByType(type));
     }
 
     @PostMapping("addPerson")
-    TraceResponse<Person> addPerson(@RequestBody Person person) {
+    HgResponse<Person> addPerson(@RequestBody Person person) {
         if (StringUtils.isEmpty(person.getName()) || StringUtils.isEmpty(person.getIdCard())) {
-            return TraceResponse.fail("姓名和身份证号不能为空");
+            return HgResponse.fail("姓名和身份证号不能为空");
         }
-        TraceResponse res;
+        HgResponse res;
         Person dup = new Person();
         dup.setIdCard(person.getIdCard());
         if (personService.exists(dup)) {
-            res = TraceResponse.fail("身份证号已经存在");
+            res = HgResponse.fail("身份证号已经存在");
         } else {
-            res = TraceResponse.success(personService.addPerson(person));
+            res = HgResponse.success(personService.addPerson(person));
 
         }
         return res;
     }
 
     @PostMapping("deletePerson")
-    TraceResponse<Person> deletePerson(@RequestParam int id) {
+    HgResponse<Person> deletePerson(@RequestParam int id) {
         personService.deletePerson(id);
-        return TraceResponse.success();
+        return HgResponse.success();
     }
 
     @PostMapping("updatePerson")
-    TraceResponse<Person> updatePerson(@RequestBody Person person) {
+    HgResponse<Person> updatePerson(@RequestBody Person person) {
         personService.updatePerson(person);
-        return TraceResponse.success();
+        return HgResponse.success();
     }
 }

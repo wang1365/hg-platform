@@ -1,6 +1,6 @@
 package com.xiaochuan.web.controller;
 
-import com.xiaochuan.web.common.TraceResponse;
+import com.xiaochuan.web.common.HgResponse;
 import com.xiaochuan.web.entity.Goods;
 import com.xiaochuan.web.service.GoodsService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,25 +19,25 @@ public class GoodsController {
     private GoodsService goodsService;
 
     @RequestMapping(value = "/web/goods/addGoods", method = RequestMethod.POST)
-    TraceResponse<Goods> addGoods(@RequestBody Goods goods) {
+    HgResponse<Goods> addGoods(@RequestBody Goods goods) {
         goodsService.addGoods(goods);
-        return TraceResponse.success(goods);
+        return HgResponse.success(goods);
     }
 
     @RequestMapping(value = "/web/goods/updateGoods", method = RequestMethod.POST)
-    TraceResponse<Goods> updateGoods(@RequestBody Goods goods) {
+    HgResponse<Goods> updateGoods(@RequestBody Goods goods) {
         goodsService.updateGoods(goods);
-        return TraceResponse.success(goods);
+        return HgResponse.success(goods);
     }
 
     @RequestMapping(value = "/web/goods/deleteGoods", method = RequestMethod.POST)
-    TraceResponse deleteGoods(@RequestParam int id) {
+    HgResponse deleteGoods(@RequestParam int id) {
         goodsService.deleteGoods(id);
-        return TraceResponse.success();
+        return HgResponse.success();
     }
 
     @RequestMapping(value = "/web/goods/getGoodsList", method = RequestMethod.GET)
-    TraceResponse<List<Goods>> getGoodsList() {
-        return TraceResponse.success(goodsService.getAllGoods());
+    HgResponse<List<Goods>> getGoodsList() {
+        return HgResponse.success(goodsService.getAllGoods());
     }
 }

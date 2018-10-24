@@ -1,6 +1,6 @@
 package com.xiaochuan.web.controller;
 
-import com.xiaochuan.web.common.TraceResponse;
+import com.xiaochuan.web.common.HgResponse;
 import com.xiaochuan.web.entity.ImageCategory;
 import com.xiaochuan.web.service.ImageCategoryService;
 import lombok.extern.slf4j.Slf4j;
@@ -22,19 +22,19 @@ public class ImageCategoryController {
     private ImageCategoryService service;
 
     @PostMapping("addImageCategory")
-    TraceResponse addImageCategory(@RequestBody ImageCategory imageCategory) {
+    HgResponse addImageCategory(@RequestBody ImageCategory imageCategory) {
         service.add(imageCategory);
-        return TraceResponse.success();
+        return HgResponse.success();
     }
 
     @GetMapping("getImageCategoryList")
-    TraceResponse<List<ImageCategory>> getImageCategoryList() {
-        return TraceResponse.success(service.getAll());
+    HgResponse<List<ImageCategory>> getImageCategoryList() {
+        return HgResponse.success(service.getAll());
     }
 
     @GetMapping("deleteImageCategory")
-    TraceResponse deleteImageCategory(int id) {
+    HgResponse deleteImageCategory(int id) {
         service.delete(id);
-        return TraceResponse.success();
+        return HgResponse.success();
     }
 }

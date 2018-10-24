@@ -1,6 +1,6 @@
 package com.xiaochuan.web.controller;
 
-import com.xiaochuan.web.common.TraceResponse;
+import com.xiaochuan.web.common.HgResponse;
 import com.xiaochuan.web.entity.Company;
 import com.xiaochuan.web.service.CompanyService;
 import org.springframework.web.bind.annotation.*;
@@ -19,18 +19,18 @@ public class CompanyController {
     }
 
     @GetMapping("/getCompanyList")
-    public TraceResponse getCompanyList() {
-        return TraceResponse.success(companyService.getAll());
+    public HgResponse getCompanyList() {
+        return HgResponse.success(companyService.getAll());
     }
 
     @PostMapping("/addCompany")
-    public TraceResponse addCompany(@RequestBody Company company) {
-        return TraceResponse.success(companyService.add(company));
+    public HgResponse addCompany(@RequestBody Company company) {
+        return HgResponse.success(companyService.add(company));
     }
 
     @PostMapping("/updateCompany")
-    public TraceResponse updateCompany(@RequestBody Company company) {
-        return TraceResponse.success(companyService.update(company));
+    public HgResponse updateCompany(@RequestBody Company company) {
+        return HgResponse.success(companyService.update(company));
     }
 
     @PostMapping("/deleteCompany")

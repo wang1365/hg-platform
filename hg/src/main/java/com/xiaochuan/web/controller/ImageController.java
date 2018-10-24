@@ -1,6 +1,6 @@
 package com.xiaochuan.web.controller;
 
-import com.xiaochuan.web.common.TraceResponse;
+import com.xiaochuan.web.common.HgResponse;
 import com.xiaochuan.web.dto.ImageDTO;
 import com.xiaochuan.web.entity.Image;
 import com.xiaochuan.web.entity.ImageCategory;
@@ -37,15 +37,15 @@ public class ImageController {
     StorageService storageService;
 
     @PostMapping("/addImage")
-    public TraceResponse addReport(@RequestParam("file") MultipartFile file,
-                                   @RequestParam Integer catId,
-                                   @RequestParam String name) {
+    public HgResponse addReport(@RequestParam("file") MultipartFile file,
+                                @RequestParam Integer catId,
+                                @RequestParam String name) {
         if (catId <= 0 || StringUtils.isEmpty(name)) {
             log.error("Invalid parameter");
-            return TraceResponse.fail("Invalid parameter");
+            return HgResponse.fail("Invalid parameter");
         }
 
-        TraceResponse res;
+        HgResponse res;
         try {
             ImageCategory category = getImageCategory(catId);
 
@@ -62,42 +62,42 @@ public class ImageController {
             image.setUrlPath(urlPath);
 
             imageService.save(image);
-            res = TraceResponse.success();
+            res = HgResponse.success();
         } catch (Exception e) {
             log.error("failed! {}", e);
-            res = TraceResponse.fail(e.getMessage());
+            res = HgResponse.fail(e.getMessage());
         }
 
         return res;
     }
 
     @GetMapping("getImageList")
-    TraceResponse<List<ImageDTO>> getImageList() {
+    HgResponse<List<ImageDTO>> getImageList() {
         List<ImageDTO> images = imageService.getImageList();
-        return TraceResponse.success(images);
+        return HgResponse.success(images);
     }
 
     @PostMapping("deleteImage")
-    TraceResponse deleteImage(@RequestParam int id) {
-        TraceResponse res;
+    HgResponse deleteImage(@RequestParam int id) {
+        HgResponse res;
         try {
             imageService.delete(id);
-            res = TraceResponse.success();
+            res = HgResponse.success();
         } catch (Exception e) {
             log.error("deleteOrderById image faild: {}, {}", id, e);
-            res = TraceResponse.fail(e.getMessage());
+            res = HgResponse.fail(e.getMessage());
         }
         return res;
     }
 
     @GetMapping("getImageByName")
-    TraceResponse<List<Image>> getImageByName(@RequestParam String name) {
-        TraceResponse res;
+    HgResponse<List<Image>> getImageByName(@RequestParam String name) {
+        HgResponse res;
         try {
-            res = TraceResponse.success(imageService.getImageByName(name));
+            res = HgResponse.success(imageService.getImageByName(name));
         } catch (Exception e) {
             log.error("deleteOrderById image faild: {}, {}", name, e);
-            res = TraceResponse.fail(e.getMessage());
+            res = HgResponse.fail(e.getMessage());
         }
         return res;
     }

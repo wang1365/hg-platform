@@ -1,6 +1,6 @@
 package com.xiaochuan.web.controller;
 
-import com.xiaochuan.web.common.TraceResponse;
+import com.xiaochuan.web.common.HgResponse;
 import com.xiaochuan.web.dto.OrderDTO;
 import com.xiaochuan.web.entity.Order;
 import com.xiaochuan.web.service.OrderService;
@@ -24,26 +24,26 @@ public class OrderController {
     }
 
     @GetMapping("getOrderList")
-    TraceResponse<List<OrderDTO>> getOrderList() {
+    HgResponse<List<OrderDTO>> getOrderList() {
         List<OrderDTO> orderDTOS = orderService.getAllOrders();
-        return TraceResponse.success(orderDTOS);
+        return HgResponse.success(orderDTOS);
     }
 
     @PostMapping("addOrder")
-    TraceResponse add(@RequestBody Order order) {
+    HgResponse add(@RequestBody Order order) {
         orderService.addOrder(order);
-        return TraceResponse.success();
+        return HgResponse.success();
     }
 
     @PostMapping("updateOrder")
-    TraceResponse updateOrder(@RequestBody Order order) {
+    HgResponse updateOrder(@RequestBody Order order) {
         orderService.updateOrder(order);
-        return TraceResponse.success();
+        return HgResponse.success();
     }
 
     @PostMapping("deleteOrderById")
-    TraceResponse delete(@RequestParam int id) {
+    HgResponse delete(@RequestParam int id) {
         orderService.deleteOrderById(id);
-        return TraceResponse.success();
+        return HgResponse.success();
     }
 }
