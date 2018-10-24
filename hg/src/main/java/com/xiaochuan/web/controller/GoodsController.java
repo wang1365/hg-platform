@@ -20,24 +20,24 @@ public class GoodsController {
 
     @RequestMapping(value = "/web/goods/addGoods", method = RequestMethod.POST)
     HgResponse<Goods> addGoods(@RequestBody Goods goods) {
-        goodsService.addGoods(goods);
+        goodsService.save(goods);
         return HgResponse.success(goods);
     }
 
     @RequestMapping(value = "/web/goods/updateGoods", method = RequestMethod.POST)
     HgResponse<Goods> updateGoods(@RequestBody Goods goods) {
-        goodsService.updateGoods(goods);
+        goodsService.updateById(goods);
         return HgResponse.success(goods);
     }
 
     @RequestMapping(value = "/web/goods/deleteGoods", method = RequestMethod.POST)
     HgResponse deleteGoods(@RequestParam int id) {
-        goodsService.deleteGoods(id);
+        goodsService.removeById(id);
         return HgResponse.success();
     }
 
     @RequestMapping(value = "/web/goods/getGoodsList", method = RequestMethod.GET)
     HgResponse<List<Goods>> getGoodsList() {
-        return HgResponse.success(goodsService.getAllGoods());
+        return HgResponse.success(goodsService.list(null));
     }
 }

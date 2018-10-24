@@ -3,16 +3,6 @@ select 'x';
 insert into sys_user values (1, 'admin', 'admin123456', 'wangxiaochuan01@163.com', 1, now(), null, '2099-01-01', 0);
 insert into sys_user_role values (1, 'admin', 'ADMIN', now());
 
--- 商品表metadata
-insert into goods values (1, '黄瓜', 'http://img2.imgtn.bdimg.com/it/u=3765457875,3576756579&fm=26&gp=0.jpg');
-insert into goods values (2, '西瓜', 'https://ss0.bdstatic.com/70cFvHSh_Q1YnxGkpoWK1HF6hhy/it/u=2814490810,3054837474&fm=26&gp=0.jpg');
-insert into goods values (3, '南瓜', 'https://ss1.bdstatic.com/70cFvXSh_Q1YnxGkpoWK1HF6hhy/it/u=3644621908,1128380761&fm=26&gp=0.jpg');
-insert into goods values (4, '西红柿', 'https://ss0.bdstatic.com/70cFvHSh_Q1YnxGkpoWK1HF6hhy/it/u=2814490810,3054837474&fm=26&gp=0.jpg');
-insert into goods values (5, '茄子', 'https://ss1.bdstatic.com/70cFuXSh_Q1YnxGkpoWK1HF6hhy/it/u=285706841,1084773042&fm=26&gp=0.jpg');
-insert into goods values (6, '丝瓜', 'https://ss1.bdstatic.com/70cFvXSh_Q1YnxGkpoWK1HF6hhy/it/u=790900326,1949651647&fm=26&gp=0.jpg');
-insert into goods values (7, '韭菜', 'https://ss1.bdstatic.com/70cFuXSh_Q1YnxGkpoWK1HF6hhy/it/u=128985081,71651006&fm=26&gp=0.jpg');
-insert into goods values (8, '胡萝卜', 'https://ss2.bdstatic.com/70cFvnSh_Q1YnxGkpoWK1HF6hhy/it/u=19567285,2651903905&fm=26&gp=0.jpg');
-
 -- 公司表
 insert into company values (1, '北京果龙仓兴农科技有限公司', '北京市经济开发区荣华中路7号院3号楼518', '王晓森', '18734803709');
 insert into company values (2, '寿光果龙仓电子商务有限公司', '寿光市洛城街办羊田路与洛兴街路口西北角（东城工业园）', '尹鹏', '');

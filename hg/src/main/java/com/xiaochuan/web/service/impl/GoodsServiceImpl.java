@@ -1,5 +1,6 @@
 package com.xiaochuan.web.service.impl;
 
+import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.xiaochuan.web.repository.GoodsMapper;
 import com.xiaochuan.web.entity.Goods;
 import com.xiaochuan.web.service.GoodsService;
@@ -18,34 +19,6 @@ import java.util.List;
  */
 @Service
 @CacheConfig(cacheNames = "goods")
-public class GoodsServiceImpl implements GoodsService {
-    @Autowired
-    GoodsMapper goodsMapper;
+public class GoodsServiceImpl extends ServiceImpl<GoodsMapper, Goods> implements GoodsService {
 
-    @Override
-    public int addGoods(Goods goods) {
-        return goodsMapper.insert(goods);
-    }
-
-    @Override
-    public int updateGoods(Goods goods) {
-        return goodsMapper.updateById(goods);
-    }
-
-    @Override
-    @Cacheable(key="#id")
-    public Goods getGoodsById(int id) {
-        return goodsMapper.selectById(id);
-    }
-
-    @Override
-    public List<Goods> getAllGoods() {
-        return goodsMapper.selectList(null);
-    }
-
-    @Override
-    @CacheEvict(key="#id")
-    public void deleteGoods(int id) {
-        goodsMapper.deleteById(id);
-    }
 }

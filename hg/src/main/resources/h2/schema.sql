@@ -16,12 +16,20 @@ create table goods_brand
   desc varchar(1024)
 ) ENGINE = InnoDB DEFAULT CHARSET=utf8mb4;
 
-
+-- 商品信息
 create table `goods`
 (
-  id   int auto_increment    primary key,
-  name varchar(256) not null unique,
-  desc varchar(1024)
+  `id` int auto_increment    primary key,
+  `name` varchar(256) not null unique,
+  `cat_id` int not null,
+  `brand_id` int not null,
+  `qrcode` varchar(256) not null,
+  `purchase_price` int comment '采购价格，单位分',
+  `sall_price` int comment '零售价格，单位分',
+  `weight` int comment '净含量，单位g',
+  `expire_days` int comment '保质期天数',
+  `desc` varchar(1024),
+  `is_valid` tinyint(1) default true
 ) ENGINE = InnoDB DEFAULT CHARSET=utf8mb4;
 
 create table `company`

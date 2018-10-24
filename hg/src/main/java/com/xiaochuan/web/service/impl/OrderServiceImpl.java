@@ -61,7 +61,7 @@ public class OrderServiceImpl implements OrderService {
 
     private OrderDTO transformOrder(Order order) {
 
-        Goods goods = goodsService.getGoodsById(order.getGoodsId());
+        Goods goods = goodsService.getById(order.getGoodsId());
 
         OrderDTO dto = new OrderDTO();
         BeanUtils.copyProperties(order, dto);
