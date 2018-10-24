@@ -4,11 +4,11 @@ import lombok.Data;
 
 /**
  * @author: Xiaochuan Wang
- * @date: 2018/10/24 10:37
- * @description: 商品分类
+ * @date: 2018/10/24 11:06
+ * @description: 商品品牌
  */
 @Data
-public class GoodsCategory {
+public class GoodsBrand {
     private Integer id;
     private String name;
     private String desc;

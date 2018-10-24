@@ -12,7 +12,8 @@ create table goods_category
 create table goods_brand
 (
   id   int auto_increment   primary key,
-  name varchar(256) not null unique
+  name varchar(256) not null unique,
+  desc varchar(1024)
 ) ENGINE = InnoDB DEFAULT CHARSET=utf8mb4;
 
 
