@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.xiaochuan.web.repository.OrderMapper">
-  <resultMap id="BaseResultMap" type="com.xiaochuan.web.entity.Order">
+<mapper namespace="com.hg.web.repository.OrderMapper">
+  <resultMap id="BaseResultMap" type="com.hg.web.entity.Order">
     <id column="id" jdbcType="INTEGER" property="id"/>
     <result column="goods_id" jdbcType="INTEGER" property="goodsId"/>
     <result column="order_time" jdbcType="TIMESTAMP" property="orderTime"/>
@@ -43,7 +43,7 @@
     where id = #{id,jdbcType=INTEGER}
   </delete>
 
-  <insert id="insert" parameterType="com.xiaochuan.web.entity.Order">
+  <insert id="insert" parameterType="com.hg.web.entity.Order">
     <selectKey keyProperty="id" order="BEFORE" resultType="java.lang.Integer">
       SELECT LAST_INSERT_ID()
     </selectKey>
@@ -55,7 +55,7 @@
     #{plantId,jdbcType=BIGINT}, #{pickId,jdbcType=BIGINT})
   </insert>
 
-  <update id="updateByPrimaryKeySelective" parameterType="com.xiaochuan.web.entity.Order">
+  <update id="updateByPrimaryKeySelective" parameterType="com.hg.web.entity.Order">
     update `order`
     <set>
       <if test="goodsId != null">
@@ -83,7 +83,7 @@
     where id = #{id,jdbcType=INTEGER}
   </update>
 
-  <update id="updateByPrimaryKey" parameterType="com.xiaochuan.web.entity.Order">
+  <update id="updateByPrimaryKey" parameterType="com.hg.web.entity.Order">
     update order
     set goods_id = #{goodsId,jdbcType=INTEGER},
       order_time = #{orderTime,jdbcType=TIMESTAMP},
