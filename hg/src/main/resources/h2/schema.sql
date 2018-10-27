@@ -24,13 +24,13 @@ create table `goods`
   `cat_id` int not null,
   `brand_id` int not null,
   `bar_code` varchar(128),
-  `purchase_price` int comment '采购价格，单位分',
-  `sall_price` int comment '零售价格，单位分',
+  `purchase_price` decimal(8,2) comment '采购价格，单位分',
+  `sale_price` decimal(8,2) comment '零售价格，单位分',
   `unit` varchar(16) comment '单位',
-  `weight` int comment '净含量，单位g',
+  `weight` decimal(8,2) comment '净含量，单位g',
   `expire_days` int comment '保质期天数',
   `desc` varchar(1024),
-  `is_valid` tinyint(1) default true
+  `valid` tinyint(1) default true
 ) ENGINE = InnoDB DEFAULT CHARSET=utf8mb4;
 
 create table `company`

@@ -30,22 +30,22 @@ public class HgResponse<T> {
     }
 
     public static HgResponse fail(String message) {
-        return new HgResponse(false, message, null);
+        return new HgResponse<>(false, message, null);
     }
 
-    public static <T> HgResponse fail(String message, T data) {
-        return new HgResponse(false, message, data);
+    public static <T> HgResponse<T> fail(String message, T data) {
+        return new HgResponse<>(false, message, data);
     }
 
     public static HgResponse success() {
-        return new HgResponse(true, "", null);
+        return new HgResponse<>(true, "", null);
     }
 
-    public static <T> HgResponse success(T data) {
+    public static <T> HgResponse<T> success(T data) {
         return new HgResponse(true, "", data);
     }
 
-    public static <T> HgResponse success(String message, T data) {
-        return new HgResponse(true, message, data);
+    public static <T> HgResponse<T> success(String message, T data) {
+        return new HgResponse<>(true, message, data);
     }
 }
