@@ -21,7 +21,7 @@ public class Goods {
     /**
      * 条形码
      */
-    private String qrCode;
+    private String barCode;
     /**
      * 采购价格 单位分
      */
@@ -30,6 +30,10 @@ public class Goods {
      * 销售价格，单位分
      */
     private Integer salePrice;
+    /**
+     * 单位
+     */
+    private String unit;
     /**
      * 净含量，单位g
      */
