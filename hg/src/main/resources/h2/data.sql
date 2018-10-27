@@ -24,6 +24,9 @@ insert into `region` values (370783003000, '文家街道', null, '370783000000',
 insert into `region` values (370783003001, '文家庄', null, null, 370783003000, 5);
 insert into `region` values (370783003002, '桑家庄', null, null, 370783003000, 5);
 
+-- 片区
+insert into `area` values (240, '北京', 1, '果龙仓兴农科技', '王晓森', '18734803709', '北京市北京市东城区', 116.415612, 39.909984, null);
+
 
 -- 订单
 insert into `order` values (1, 1, '2018-09-25', 1500, 'kg', 120, '南京市雨花台区', 1, 1, 1, 1, null);

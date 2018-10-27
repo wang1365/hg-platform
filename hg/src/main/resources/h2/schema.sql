@@ -32,6 +32,21 @@ create table `goods`
   `is_valid` tinyint(1) default true
 ) ENGINE = InnoDB DEFAULT CHARSET=utf8mb4;
 
+-- 商品信息
+create table `area`
+(
+  `id` int auto_increment primary key,
+  `name` varchar(256) not null unique,
+  `enabled` tinyint(1) not null,
+  `charge_org` varchar(256) not null comment '所属机构',
+  `charge_owner` varchar(256) comment '负责人',
+  `owner_phone` varchar(11) comment '负责人手机号码',
+  `address` varchar(256) comment '详细地址',
+  `longitude` float comment '经度',
+  `latitude` float comment '纬度',
+  `comment` varchar(1024)
+) ENGINE = InnoDB DEFAULT CHARSET=utf8mb4;
+
 create table `company`
 (
   id   int auto_increment
