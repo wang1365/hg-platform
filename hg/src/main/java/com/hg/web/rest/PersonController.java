@@ -1,4 +1,4 @@
-package com.hg.web.controller;
+package com.hg.web.rest;
 
 import com.hg.web.common.HgResponse;
 import com.hg.web.entity.Person;

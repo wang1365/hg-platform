@@ -1,4 +1,4 @@
-package com.hg.web.controller;
+package com.hg.web.rest;
 
 import com.hg.web.entity.User;
 import com.hg.web.service.UserService;

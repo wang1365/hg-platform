@@ -33,6 +33,18 @@ create table `goods`
   `valid` tinyint(1) default true
 ) ENGINE = InnoDB DEFAULT CHARSET=utf8mb4;
 
+-- 商品标签
+create table `goods_label`
+(
+  id int auto_increment primary key,
+  barCode varchar(56) not null  comment '条形码' unique,
+  labelCode varchar(128) not null comment '标签码(RFID)',
+  productDate datetime not null comment '生产日期',
+  expireDays int not null,
+  status int not null default 0,
+  createTime datetime default current_timestamp
+) ENGINE = InnoDB DEFAULT CHARSET=utf8mb4;
+
 create table `company`
 (
   id   int auto_increment

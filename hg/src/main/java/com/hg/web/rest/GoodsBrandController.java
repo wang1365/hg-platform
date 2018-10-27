@@ -1,4 +1,4 @@
-package com.hg.web.controller;
+package com.hg.web.rest;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.hg.web.common.HgResponse;

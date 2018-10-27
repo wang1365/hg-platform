@@ -1,5 +1,6 @@
 package com.hg.web.service.impl;
 
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.hg.web.dto.GoodsDTO;
 import com.hg.web.entity.GoodsBrand;
@@ -49,5 +50,13 @@ public class GoodsServiceImpl extends ServiceImpl<GoodsMapper, Goods> implements
             dto.setCatName(catMap.get(goods.getCatId()));
             return dto;
         }).collect(Collectors.toList());
+    }
+
+
+    @Override
+    public Goods selectByBarCode(String barCode) {
+        Goods goods = new Goods();
+        goods.setBarCode(barCode);
+        return this.getOne(new QueryWrapper(goods));
     }
 }

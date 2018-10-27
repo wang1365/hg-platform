@@ -14,7 +14,7 @@ insert into person values (2, '孙有福', 2, '男', '1980-09-21', '320101201809
 -- 商品
 insert into goods_category values (1, '蔬菜', '寿光蔬菜');
 insert into goods_brand values (1, '果龙仓','中国优质蔬菜品牌');
-
+insert into goods values (1, '黄瓜3斤装', 1, 1, '2154321412', 2.35, 5.50, 'kg', 1.5, 6, '规格：1.5kg', true);
 -- 行政区
 insert into `region` values (370700000000, '潍坊市', '潍', '370700000000', null, 2);
 
