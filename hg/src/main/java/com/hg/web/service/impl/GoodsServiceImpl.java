@@ -45,8 +45,8 @@ public class GoodsServiceImpl extends ServiceImpl<GoodsMapper, Goods> implements
         return items.stream().map(goods -> {
             GoodsDTO dto = new GoodsDTO();
             BeanUtils.copyProperties(goods, dto);
-            dto.setBrandName(brandMap.get(goods.getId()));
-            dto.setCatName(catMap.get(goods.getId()));
+            dto.setBrandName(brandMap.get(goods.getBrandId()));
+            dto.setCatName(catMap.get(goods.getCatId()));
             return dto;
         }).collect(Collectors.toList());
     }
