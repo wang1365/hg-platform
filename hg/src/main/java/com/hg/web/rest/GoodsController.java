@@ -43,4 +43,10 @@ public class GoodsController {
     HgResponse<List<GoodsDTO>> getGoodsList() {
         return HgResponse.success(goodsService.listGoodsDetail());
     }
+
+    @RequestMapping(value = "/goods/getGoodsByBarCode")
+    HgResponse<GoodsDTO> getGoodsByBarCode(@RequestParam String barCode) {
+        GoodsDTO dto = goodsService.selectByBarCode(barCode);
+        return HgResponse.success(dto);
+    }
 }

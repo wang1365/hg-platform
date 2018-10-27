@@ -37,12 +37,12 @@ create table `goods`
 create table `goods_label`
 (
   id int auto_increment primary key,
-  barCode varchar(56) not null  comment '条形码' unique,
-  labelCode varchar(128) not null comment '标签码(RFID)',
-  productDate datetime not null comment '生产日期',
-  expireDays int not null,
+  bar_code varchar(56) not null  comment '条形码' unique,
+  label_code varchar(128) not null comment '标签码(RFID)',
+  product_date datetime not null comment '生产日期',
+  expire_days int not null,
   status int not null default 0,
-  createTime datetime default current_timestamp
+  create_time datetime default current_timestamp
 ) ENGINE = InnoDB DEFAULT CHARSET=utf8mb4;
 
 create table `company`

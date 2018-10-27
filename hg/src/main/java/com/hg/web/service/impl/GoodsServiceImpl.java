@@ -54,9 +54,21 @@ public class GoodsServiceImpl extends ServiceImpl<GoodsMapper, Goods> implements
 
 
     @Override
-    public Goods selectByBarCode(String barCode) {
+    public GoodsDTO selectByBarCode(String barCode) {
         Goods goods = new Goods();
         goods.setBarCode(barCode);
-        return this.getOne(new QueryWrapper(goods));
+
+        goods =  this.getOne(new QueryWrapper(goods));
+        if (goods == null) {
+            return null;
+        }
+
+        GoodsCategory cat = categoryService.getById(goods.getCatId());
+        GoodsBrand brand = brandService.getById(goods.getBrandId());
+        GoodsDTO dto = new GoodsDTO();
+        BeanUtils.copyProperties(goods, dto);
+        dto.setBrandName(brand.getName());
+        dto.setCatName(cat.getName());
+        return dto;
     }
 }
