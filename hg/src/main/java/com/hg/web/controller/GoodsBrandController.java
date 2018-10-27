@@ -1,8 +1,11 @@
 package com.hg.web.controller;
 
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.hg.web.common.HgResponse;
+import com.hg.web.entity.Goods;
 import com.hg.web.entity.GoodsBrand;
 import com.hg.web.service.GoodsBrandService;
+import com.hg.web.service.GoodsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -16,6 +19,9 @@ import org.springframework.web.bind.annotation.*;
 public class GoodsBrandController {
     @Autowired
     private GoodsBrandService goodsBrandService;
+
+    @Autowired
+    private GoodsService goodsService;
 
     @GetMapping("getGoodsBrandList")
     HgResponse getGoodsBrandList() {
@@ -36,6 +42,11 @@ public class GoodsBrandController {
 
     @PostMapping("deleteGoodsBrand")
     HgResponse deleteGoodsBrand(int id) {
+        Goods goods = new Goods();
+        goods.setBrandId(id);
+        if (goodsService.getOne(new QueryWrapper<>(goods)) != null) {
+            return HgResponse.fail("当前商品品牌已被使用，无法删除!");
+        }
         goodsBrandService.removeById(id);
         return HgResponse.success();
     }

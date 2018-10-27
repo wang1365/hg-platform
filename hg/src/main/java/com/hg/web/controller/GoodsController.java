@@ -34,6 +34,7 @@ public class GoodsController {
 
     @RequestMapping(value = "/goods/deleteGoods", method = RequestMethod.POST)
     HgResponse deleteGoods(@RequestParam int id) {
+
         goodsService.removeById(id);
         return HgResponse.success();
     }

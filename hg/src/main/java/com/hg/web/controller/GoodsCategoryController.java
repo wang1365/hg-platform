@@ -1,8 +1,11 @@
 package com.hg.web.controller;
 
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.hg.web.common.HgResponse;
+import com.hg.web.entity.Goods;
 import com.hg.web.entity.GoodsCategory;
 import com.hg.web.service.GoodsCategoryService;
+import com.hg.web.service.GoodsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -16,6 +19,9 @@ import org.springframework.web.bind.annotation.*;
 public class GoodsCategoryController {
     @Autowired
     private GoodsCategoryService goodsCategoryService;
+
+    @Autowired
+    private GoodsService goodsService;
 
     @GetMapping("getGoodsCategoryList")
     HgResponse getGoodsCategoryList() {
@@ -36,6 +42,12 @@ public class GoodsCategoryController {
 
     @PostMapping("deleteGoodsCategory")
     HgResponse deleteGoodsCategory(int id) {
+        Goods goods = new Goods();
+        goods.setCatId(id);
+        if (goodsService.getOne(new QueryWrapper<>(goods)) != null) {
+            return HgResponse.fail("当前分类已被使用，无法删除!");
+        }
+
         goodsCategoryService.removeById(id);
         return HgResponse.success();
     }
