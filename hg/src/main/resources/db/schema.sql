@@ -23,13 +23,26 @@ create table `goods`
   `name` varchar(256) not null unique,
   `cat_id` int not null,
   `brand_id` int not null,
-  `qrcode` varchar(256) not null,
-  `purchase_price` int comment '采购价格，单位分',
-  `sall_price` int comment '零售价格，单位分',
-  `weight` int comment '净含量，单位g',
+  `bar_code` varchar(128),
+  `purchase_price` decimal(8,2) comment '采购价格，单位分',
+  `sale_price` decimal(8,2) comment '零售价格，单位分',
+  `unit` varchar(16) comment '单位',
+  `weight` decimal(8,2) comment '净含量，单位g',
   `expire_days` int comment '保质期天数',
   `desc` varchar(1024),
-  `is_valid` tinyint(1) default true
+  `valid` tinyint(1) default true
+) ENGINE = InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- 商品标签
+create table `goods_label`
+(
+  id int auto_increment primary key,
+  bar_code varchar(56) not null  comment '条形码' unique,
+  label_code varchar(128) not null comment '标签码(RFID)',
+  product_date datetime not null comment '生产日期',
+  expire_days int not null,
+  status int not null default 0,
+  create_time datetime default current_timestamp
 ) ENGINE = InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- 商品信息
