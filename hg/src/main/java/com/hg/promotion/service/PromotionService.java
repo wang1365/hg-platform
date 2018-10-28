@@ -1,6 +1,7 @@
 package com.hg.promotion.service;
 
 import com.baomidou.mybatisplus.extension.service.IService;
+import com.hg.promotion.dto.PromotionDTO;
 import com.hg.promotion.entity.Promotion;
 
 /**
@@ -9,4 +10,6 @@ import com.hg.promotion.entity.Promotion;
  * @description:
  */
 public interface PromotionService extends IService<Promotion> {
+    int addPromotionDetail(PromotionDTO promotionDTO);
+    boolean updateById(PromotionDTO promotionDTO);
 }
