@@ -68,7 +68,7 @@ create table `promotion`
   start_time datetime not null comment '',
   end_time datetime not null comment '',
   limit_times int not null default 0 comment '限制使用的次数，0：不限制',
-  rule_type int not null comment '1:首单立减 2:优惠折扣 3:商品满减 4:随机立减',
+  rule_type int not null comment '1:首单立减  2:商品满减 3:随机立减 4:优惠折扣',
   rule_id int,
   include_all_cat tinyint(1) not null default false comment '是否所有商品分类都参加',
   include_all_brand tinyint(1) not null default false comment '是否所有商品品牌都参加',

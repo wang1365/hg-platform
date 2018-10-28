@@ -10,7 +10,7 @@ public enum PromotionType {
      * 促销类型
      */
     FIRST_REDUCTION(1, "首单立减"),
-    FULL_REDUCTION(2, "满减"),
+    FULL_REDUCTION(2, "商品满减"),
     RANDOM_REDUCTION(3, "随机立减"),
     DISCOUNT(4, "优惠折扣");
 
