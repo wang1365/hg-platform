@@ -45,7 +45,7 @@ create table `goods_label`
   create_time datetime default current_timestamp
 ) ENGINE = InnoDB DEFAULT CHARSET=utf8mb4;
 
--- 商品信息
+-- 片区
 create table `area`
 (
   `id` int auto_increment primary key,
@@ -58,6 +58,72 @@ create table `area`
   `longitude` float comment '经度',
   `latitude` float comment '纬度',
   `comment` varchar(1024)
+) ENGINE = InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- 促销
+create table `promotion`
+(
+  id int auto_increment primary key,
+  name varchar(128) not null comment '',
+  start_time datetime not null comment '',
+  end_time datetime not null comment '',
+  limit_times int not null default 0 comment '限制使用的次数，0：不限制',
+  rule_type int not null comment '1:首单立减 2:优惠折扣 3:商品满减 4:随机立减',
+  rule_id int,
+  include_all_cat tinyint(1) not null default false comment '是否所有商品分类都参加',
+  include_all_brand tinyint(1) not null default false comment '是否所有商品品牌都参加',
+  include_all_hg tinyint(1) not null default false comment '是否所有货柜都参加',
+  audited tinyint(1) not null default false comment '是否审核'
+) ENGINE = InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- 首单立减
+create table `promotion_rule_first_reduction`
+(
+  id int auto_increment primary key,
+  promotion_id int not null unique,
+  reduce_value decimal(6, 2) not null
+) ENGINE = InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- 满减
+create table `promotion_rule_full_reduction`
+(
+  id int auto_increment primary key,
+  promotion_id int not null,
+  full_value decimal(6,2) not null,
+  reduce_value decimal(6, 2) not null
+) ENGINE = InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- 随机立减
+create table `promotion_rule_random_reduction`
+(
+  id int auto_increment primary key,
+  promotion_id int not null,
+  min_value decimal(6,2) not null,
+  max_value decimal(6, 2) not null
+) ENGINE = InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- 优惠折扣
+create table `promotion_rule_discount`
+(
+  id int auto_increment primary key,
+  promotion_id int not null unique,
+  rate decimal(3, 2) not null comment '折扣率'
+) ENGINE = InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- 分类促销
+create table promotion_category
+(
+  id int auto_increment primary key,
+  promotion_id int not null,
+  cat_id int not null
+) ENGINE = InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- 品牌促销
+create table promotion_category
+(
+  id int auto_increment primary key,
+  promotion_id int not null,
+  brand_id int not null
 ) ENGINE = InnoDB DEFAULT CHARSET=utf8mb4;
 
 create table `company`
