@@ -4,6 +4,7 @@ import com.hg.promotion.dto.PromotionDTO;
 import com.hg.promotion.entity.Promotion;
 import com.hg.promotion.service.PromotionService;
 import com.hg.web.common.HgResponse;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -37,9 +38,9 @@ public class PromotionController {
         return HgResponse.success();
     }
 
-    @PostMapping("deletePromotion")
-    HgResponse addPromotion(@RequestParam int id) {
-        promotionService.removeById(id);
+    @PostMapping("deletePromotionByIdAndRuleType")
+    HgResponse deletePromotionByIdAndRuleType(@RequestParam int id, @RequestParam int ruleType) {
+        promotionService.removeByIdAndRuleType(id, ruleType);
         return HgResponse.success();
     }
 }

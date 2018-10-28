@@ -13,5 +13,5 @@ import java.math.BigDecimal;
 @Data
 @TableName("promotion_rule_first_reduction")
 public class FirstReduction extends PromotionRule {
-    private BigDecimal rate;
+    private BigDecimal reduceValue;
 }

@@ -12,4 +12,5 @@ import com.hg.promotion.entity.Promotion;
 public interface PromotionService extends IService<Promotion> {
     int addPromotionDetail(PromotionDTO promotionDTO);
     boolean updateById(PromotionDTO promotionDTO);
+    void removeByIdAndRuleType(int id, int ruleType);
 }

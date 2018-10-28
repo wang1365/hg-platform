@@ -16,6 +16,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.Resource;
+import java.util.List;
 
 /**
  * @author: Xiaochuan Wang
@@ -43,6 +44,7 @@ public class PromotionServiceImpl extends ServiceImpl<PromotionMapper, Promotion
         BeanUtils.copyProperties(promotionDTO, promotion);
         this.save(promotion);
 
+        promotionDTO.setId(promotion.getId());
         savePromotionItem(promotionDTO);
         return promotion.getId();
     }
@@ -72,16 +74,54 @@ public class PromotionServiceImpl extends ServiceImpl<PromotionMapper, Promotion
         return true;
     }
 
+    @Override
+    public void removeByIdAndRuleType(int id, int ruleType) {
+        deletePromotionItems(id, ruleType);
+        this.removeById(id);
+    }
+
+    private void deletePromotionItems(int id, int ruleType) {
+        if (ruleType == PromotionType.FIRST_REDUCTION.getCode()) {
+            FirstReduction reduction = new FirstReduction();
+            reduction.setPromotionId(id);
+            firstReductionService.remove(new QueryWrapper<>(reduction));
+        } else if (ruleType == PromotionType.FULL_REDUCTION.getCode()) {
+            FullReduction reduction = new FullReduction();
+            reduction.setPromotionId(id);
+            fullReductionService.remove(new QueryWrapper<>(reduction));
+        } else if (ruleType == PromotionType.RANDOM_REDUCTION.getCode()) {
+            RandomReduction reduction = new RandomReduction();
+            reduction.setPromotionId(id);
+            randomReductionService.remove(new QueryWrapper<>(reduction));
+        } else if (ruleType == PromotionType.DISCOUNT.getCode()) {
+            Discount reduction = new Discount();
+            reduction.setPromotionId(id);
+            discountService.remove(new QueryWrapper<>(reduction));
+        }
+    }
+
     private void savePromotionItem(PromotionDTO promotionDTO) {
-        int ruleId = promotionDTO.getRuleId();
+        int ruleId = promotionDTO.getRuleType();
         if (ruleId == PromotionType.FIRST_REDUCTION.getCode()) {
-            firstReductionService.save(promotionDTO.getFirstReduction());
+            FirstReduction reduction = promotionDTO.getFirstReduction();
+            reduction.setPromotionId(promotionDTO.getId());
+
+            firstReductionService.save(reduction);
         } else if (ruleId == PromotionType.FULL_REDUCTION.getCode()) {
-            fullReductionService.saveBatch(promotionDTO.getFullReductions());
+            List<FullReduction> reductions = promotionDTO.getFullReductions();
+            reductions.forEach(r->{
+                r.setPromotionId(promotionDTO.getId());
+                fullReductionService.save(r);
+            });
         } else if (ruleId == PromotionType.RANDOM_REDUCTION.getCode()) {
-            randomReductionService.save(promotionDTO.getRandomReduction());
+            RandomReduction reduction = promotionDTO.getRandomReduction();
+            reduction.setPromotionId(promotionDTO.getId());
+
+            randomReductionService.save(reduction);
         } else if (ruleId == PromotionType.DISCOUNT.getCode()) {
-            discountService.save(promotionDTO.getDiscount());
+            Discount reduction = promotionDTO.getDiscount();
+            reduction.setPromotionId(promotionDTO.getId());
+            discountService.save(reduction);
         }
     }
 }
