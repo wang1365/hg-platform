@@ -19,7 +19,8 @@ import org.springframework.cache.annotation.EnableCaching;
 @SpringBootApplication
 @EnableCaching
 @EnableConfigurationProperties({QualityReportProperties.class})
-@MapperScan("com.hg.web.repository")
+@MapperScan({"com.hg.web.repository", "com.hg.promotion.repository"})
+
 public class Application extends SpringBootServletInitializer {
 
     @Override

@@ -73,7 +73,9 @@ create table `promotion`
   include_all_cat tinyint(1) not null default false comment '是否所有商品分类都参加',
   include_all_brand tinyint(1) not null default false comment '是否所有商品品牌都参加',
   include_all_hg tinyint(1) not null default false comment '是否所有货柜都参加',
-  audited tinyint(1) not null default false comment '是否审核'
+  audited tinyint(1) not null default false comment '是否审核',
+  desc varchar(1028),
+  create_time datetime not null default current_timestamp
 ) ENGINE = InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- 首单立减
@@ -119,7 +121,7 @@ create table promotion_category
 ) ENGINE = InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- 品牌促销
-create table promotion_category
+create table promotion_brand
 (
   id int auto_increment primary key,
   promotion_id int not null,

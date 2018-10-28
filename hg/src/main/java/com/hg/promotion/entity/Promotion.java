@@ -28,4 +28,6 @@ public class Promotion {
     private Boolean includeAllBrand;
     private Boolean includeAllHg;
     private Boolean audited;
+    private String desc;
+    private Date createTime;
 }
