@@ -1,7 +1,7 @@
 package com.hg.promotion.dto;
 
 import com.hg.promotion.entity.Promotion;
-import com.hg.promotion.entity.rule.PromotionRule;
+import com.hg.promotion.entity.rule.*;
 import lombok.Data;
 
 import java.util.List;
@@ -13,8 +13,8 @@ import java.util.List;
  */
 @Data
 public class PromotionDTO  extends Promotion {
-    private PromotionRule firstReduction;
-    private List<PromotionRule> fullReductions;
-    private PromotionRule randomReduction;
-    private PromotionRule discount;
+    private FirstReduction firstReduction;
+    private List<FullReduction> fullReductions;
+    private RandomReduction randomReduction;
+    private Discount discount;
 }
