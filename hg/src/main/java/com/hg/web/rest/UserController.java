@@ -26,7 +26,7 @@ public class UserController {
     }
 
     @GetMapping(value = "/getUserList")
-    List<User> getUserList() {
-        return userService.list(null);
+    HgResponse<List<User>> getUserList() {
+        return HgResponse.success(userService.list(null));
     }
 }

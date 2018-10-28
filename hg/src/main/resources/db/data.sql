@@ -7,9 +7,9 @@ insert into sys_user_role values (1, 'admin', 'ADMIN', now());
 insert into company values (1, '北京果龙仓兴农科技有限公司', '北京市经济开发区荣华中路7号院3号楼518', '王晓森', '18734803709');
 insert into company values (2, '寿光果龙仓电子商务有限公司', '寿光市洛城街办羊田路与洛兴街路口西北角（东城工业园）', '尹鹏', '');
 
--- person
-insert into person values (1, '陈建国', 1, '男', '1977-09-20', '320101201809201110', '山东省寿光市文家街道桑家村', '13712341234', '桑家村');
-insert into person values (2, '孙有福', 2, '男', '1980-09-21', '320101201809211120', '山东省寿光市孙家集街道杨家村', '13712341244', '杨家村');
+-- 用户
+insert into `user` values (1, '风清扬', 2, 'oocDpw1m6HiGs_N5wcaadao-hJSI', '', true, 2, '2018-04-10 13:38:51', '2018-04-10 13:38:11');
+insert into `user` values (2, '薄荷柠檬', 1, 'oocDpw_hGX-4TnU5swv_3FGvcu1w', '', true, 2, '2018-10-12 13:01:57', '	2018-10-12 13:01:27');
 
 -- 商品
 insert into goods_category values (1, '蔬菜', '寿光蔬菜');
