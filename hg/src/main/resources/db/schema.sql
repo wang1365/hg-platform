@@ -128,6 +128,21 @@ create table promotion_brand
   brand_id int not null
 ) ENGINE = InnoDB DEFAULT CHARSET=utf8mb4;
 
+-- 用户（下订单的用户）
+create table user
+(
+  id int auto_increment primary key,
+  nick_name varchar(128) not null,
+  type int not null comment '用户类型 1：微信 2：支付宝',
+  platform_code varchar(128) not null comment '平台ID',
+  phone varchar(26),
+  credit_audited tinyint(1) not null,
+  credit_level int not null,
+  register_time datetime not null,
+  create_time datetime not null default current_timestamp
+) ENGINE = InnoDB DEFAULT CHARSET=utf8mb4;
+
+
 create table `company`
 (
   id   int auto_increment
@@ -197,14 +212,6 @@ create table sys_role
   unique (id)
 ) ENGINE = InnoDB DEFAULT CHARSET=utf8mb4;
 
-create table town
-(
-  id   int auto_increment
-    primary key,
-  name varchar(1024) not null,
-  constraint town_id_uindex
-  unique (id)
-) ENGINE = InnoDB DEFAULT CHARSET=utf8mb4;
 
 
 create table sys_user

@@ -1,9 +1,9 @@
 package com.hg.web.repository;
 
+import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.hg.web.entity.User;
 import org.apache.ibatis.annotations.Mapper;
 
-import java.util.List;
 
 /**
  * @author wangxiaochuan
@@ -11,21 +11,5 @@ import java.util.List;
  * @date 2018/8/22 9:53
  */
 @Mapper
-public interface UserMapper {
-    int deleteByPrimaryKey(Integer id);
-
-    int insert(User record);
-
-    int insertSelective(User record);
-
-    User selectByPrimaryKey(Integer id);
-
-    User selectByName(String name);
-
-    List<User> select();
-
-
-    int updateByPrimaryKeySelective(User record);
-
-    int updateByPrimaryKey(User record);
+public interface UserMapper extends BaseMapper<User> {
 }

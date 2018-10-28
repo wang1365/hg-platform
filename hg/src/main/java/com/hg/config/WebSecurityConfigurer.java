@@ -34,9 +34,6 @@ import javax.sql.DataSource;
 @Order(SecurityProperties.ACCESS_OVERRIDE_ORDER)
 public class WebSecurityConfigurer extends WebSecurityConfigurerAdapter {
     @Autowired
-    private UserDetailsService userDetailsService;
-
-    @Autowired
     private DataSource dataSource;
 
 //    @Autowired

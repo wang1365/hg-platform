@@ -1,12 +1,10 @@
 package com.hg.web.rest;
 
+import com.hg.web.common.HgResponse;
 import com.hg.web.entity.User;
 import com.hg.web.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -16,18 +14,19 @@ import java.util.List;
  * @date 2018/8/22 9:53
  */
 @RestController
+@RequestMapping("/web/user")
 public class UserController {
     @Autowired
     private UserService userService;
 
-    @RequestMapping(value = "/admin/user", method = RequestMethod.POST)
-    User addUser(@RequestBody User newUser) {
-        int userId = userService.addUser(newUser.getUserName(), newUser.getPassword());
-        return userService.getUserById(userId);
+    @PostMapping(value = "addUser")
+    HgResponse addUser(@RequestBody User user) {
+        userService.save(user);
+        return HgResponse.success();
     }
 
-    @RequestMapping(value = "/admin/user", method = RequestMethod.GET)
-    List<User> getUsers() {
-        return userService.getUsers();
+    @GetMapping(value = "/getUserList")
+    List<User> getUserList() {
+        return userService.list(null);
     }
 }
