@@ -11,8 +11,8 @@ import java.util.Date;
 
 /**
  * @author: Xiaochuan Wang
- * @date: 2018/9/3 11:07
- * @description: 商品采购订单
+ * @date: 2018/10/30 11:07
+ * @description: 用户订单
  */
 @Data
 @TableName("`order`")
