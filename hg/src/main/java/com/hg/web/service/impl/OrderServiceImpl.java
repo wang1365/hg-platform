@@ -59,16 +59,9 @@ public class OrderServiceImpl implements OrderService {
 
     private OrderDTO transformOrder(Order order) {
 
-        Goods goods = goodsService.getById(order.getGoodsId());
 
         OrderDTO dto = new OrderDTO();
-        BeanUtils.copyProperties(order, dto);
-        dto.setGoodsName(goods.getName());
 
-        Person seller = personService.getPersonById(order.getSellerId());
-        Person buyer = personService.getPersonById(order.getBuyerId());
-        dto.setSellerName(seller != null ? seller.getName() : "");
-        dto.setBuyerName(buyer != null ? buyer.getName() : "");
 
         return dto;
     }

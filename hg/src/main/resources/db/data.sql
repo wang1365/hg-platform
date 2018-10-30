@@ -33,7 +33,7 @@ insert into `area` values (240, '北京', 1, '果龙仓兴农科技', '王晓森
 
 
 -- 订单
-insert into `order` values (1, 1, '2018-09-25', 1500, 'kg', 120, '南京市雨花台区', 1, 1, 1, 1, null);
+-- insert into `order` values (1, 1, '2018-09-25', 1500, 'kg', 120, '南京市雨花台区', 1, 1, 1, 1, null);
 
 -- 图片
 insert into `image_category` values (1, '质检报告', 0, '/root/hg/static/upload', 'http://www.tiaocaishi.com:9527/resources', '');

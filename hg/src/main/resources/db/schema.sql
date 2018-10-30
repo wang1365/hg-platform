@@ -157,19 +157,22 @@ create table `company`
 
 create table `order`
 (
-  id         int auto_increment    primary key,
-  goods_id   int                       not null  comment '采购商品ID',
-  order_time datetime                  not null  comment '采购时间',
-  quantity     int                      not null  comment '数量',
-  unit varchar(26)                     not null comment '单位',
-  price int comment '分/kg',
-  address    varchar(256) null  comment '采购地点',
-  seller_id  int                       null,
-  buyer_id   int                       null,
-  report_id  int                       null comment '质检报告ID',
-  plant_id   bigint comment '种植计划ID',
-  pick_id bigint comment '种植条目中对应的采摘ID',
-  constraint order_id_uindex  unique (id)
+  id int auto_increment primary key,
+  status int not null comment '订单状态 0；创建 1：完成 2：支付中 3：支付成功 4：支付失败 -1：取消',
+  audit_status int not null comment '审核状态 0：未审核 1：完成审核',
+  amount decimal(10,2) not null comment '订单金额',
+  reduce_amount decimal(10,2)  comment '折扣金额',
+  goods_count int not null comment '商品数量',
+  cat_count int not null comment '商品分类数量',
+  area_id int not null comment '片区ID',
+  area_name varchar(56) not null comment '片区名称',
+  point_id int not null comment '点位ID',
+  point_name varchar(56) not null comment '点位名称',
+  user_id int not null comment '用户ID',
+  user_nick_name varchar(56) not null comment '用户昵称',
+  user_type int not null comment '用户类型 1：微信 2：支付宝',
+  order_time datetime not null comment '订单创建时间',
+  create_time datetime not null default current_timestamp
 )  DEFAULT CHARSET=utf8mb4;
 
 create table `person`

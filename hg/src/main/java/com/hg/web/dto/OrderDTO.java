@@ -18,9 +18,4 @@ public class OrderDTO extends Order {
     private String buyerName;
 
     private String summary;
-
-    public String getSummary() {
-        return String.format("%d: %s %s收购%s %s %d %s", getId(), DatetimeUtil.formatDate(getOrderTime()),
-                buyerName, sellerName, goodsName, getQuantity(), getUnit());
-    }
 }
