@@ -1,5 +1,6 @@
 package com.hg.web.service.impl;
 
+import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.hg.web.repository.CompanyMapper;
 import com.hg.web.entity.Company;
 import com.hg.web.service.CompanyService;
@@ -13,7 +14,7 @@ import java.util.List;
  * @description:
  */
 @Service
-public class CompanyServiceImpl implements CompanyService {
+public class CompanyServiceImpl extends ServiceImpl<CompanyMapper, Company> implements CompanyService {
     private CompanyMapper companyMapper;
 
     public CompanyServiceImpl(CompanyMapper companyMapper) {

@@ -21,7 +21,7 @@ public class Area {
     private String address;
     // 经度
     private Double longitude;
-    // 维度
+    // 纬度
     private Double latitude;
     // 备注
     private String comment;
