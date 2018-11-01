@@ -7,6 +7,12 @@ insert into sys_user_role values (1, 'admin', 'ADMIN', now());
 insert into company values (1, '北京果龙仓兴农科技有限公司', '北京市经济开发区荣华中路7号院3号楼518', '王晓森', '18734803709');
 insert into company values (2, '寿光果龙仓电子商务有限公司', '寿光市洛城街办羊田路与洛兴街路口西北角（东城工业园）', '尹鹏', '');
 
+
+--- 职员表
+insert into person values (1, '于松', 10, '男', null, null, null, '1234546678', '寿光果龙仓电子商务有限公司');
+insert into person values (2, '尹鹏', 10, '男', null, null, null, '1234546789', '北京果龙仓兴农科技有限公司');
+
+
 -- 用户
 insert into `user` values (1, '风清扬', 2, 'oocDpw1m6HiGs_N5wcaadao-hJSI', '', true, 2, '2018-04-10 13:38:51', '2018-04-10 13:38:11');
 insert into `user` values (2, '薄荷柠檬', 1, 'oocDpw_hGX-4TnU5swv_3FGvcu1w', '', true, 2, '2018-10-12 13:01:57', '	2018-10-12 13:01:27');
@@ -29,7 +35,7 @@ insert into `region` values (370783003001, '文家庄', null, null, 370783003000
 insert into `region` values (370783003002, '桑家庄', null, null, 370783003000, 5);
 
 -- 片区
-insert into `area` values (240, '北京', 1, '寿光果龙仓电子商务有限公司', '王晓森', '18734803709', '北京市北京市东城区', 116.415612, 39.909984, null);
+insert into `area` values (240, '北京', 1, '寿光果龙仓电子商务有限公司', '于松', '18734803709', '北京市北京市东城区', 116.415612, 39.909984, null);
 
 
 -- 订单

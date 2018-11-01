@@ -16,5 +16,6 @@ public interface PersonService {
     int updatePerson(Person person);
     List<Person> getAllPersons();
     List<Person> getPersonListByType(int type);
+    List<Person> getPersonListByCompany(String companyName);
     void deletePerson(int id);
 }

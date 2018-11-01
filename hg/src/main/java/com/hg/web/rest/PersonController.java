@@ -31,6 +31,11 @@ public class PersonController {
         return HgResponse.success(personService.getPersonListByType(type));
     }
 
+    @GetMapping("getPersonListByCompany")
+    HgResponse<List<Person>> getPersonListByCompnay(@RequestParam String companyName) {
+        return HgResponse.success(personService.getPersonListByCompany(companyName));
+    }
+
     @PostMapping("addPerson")
     HgResponse<Person> addPerson(@RequestBody Person person) {
         if (StringUtils.isEmpty(person.getName()) || StringUtils.isEmpty(person.getIdCard())) {

@@ -1,6 +1,7 @@
 package com.hg.web.service.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.hg.web.repository.PersonMapper;
 import com.hg.web.entity.Person;
 import com.hg.web.service.PersonService;
@@ -19,7 +20,7 @@ import java.util.List;
 @Service
 @Slf4j
 @CacheConfig(cacheNames = "person")
-public class PersonServiceImpl implements PersonService {
+public class PersonServiceImpl extends ServiceImpl<PersonMapper, Person> implements PersonService {
 
     @Autowired
     PersonMapper personMapper;
@@ -61,6 +62,13 @@ public class PersonServiceImpl implements PersonService {
     public List<Person> getPersonListByType(int type) {
         Person person = new Person();
         person.setType(type);
+        return personMapper.selectList(new QueryWrapper<>(person));
+    }
+
+    @Override
+    public List<Person> getPersonListByCompany(String companyName) {
+        Person person = new Person();
+        person.setCompany(companyName);
         return personMapper.selectList(new QueryWrapper<>(person));
     }
 
