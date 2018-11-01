@@ -15,17 +15,15 @@ public class Area {
     // 启用状态
     private Boolean enabled;
     // 所属单位
-    private String chargeOrg;
-    // 负责人姓名
-    private String chargeOwner;
-    // 负责人手机号码
-    private String ownerPhone;
+    private Integer companyId;
+    // 负责人
+    private Integer headId;
     // 详细地址
     private String address;
     // 经度
-    private Double longitude;
+    private Float longitude;
     // 纬度
-    private Double latitude;
+    private Float latitude;
     // 备注
     private String comment;
 }

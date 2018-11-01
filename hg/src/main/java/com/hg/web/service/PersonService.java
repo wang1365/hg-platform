@@ -1,5 +1,6 @@
 package com.hg.web.service;
 
+import com.baomidou.mybatisplus.extension.service.IService;
 import com.hg.web.entity.Person;
 
 import java.util.List;
@@ -9,7 +10,7 @@ import java.util.List;
  * @version 1.0.0
  * @date 2018/8/22 9:53
  */
-public interface PersonService {
+public interface PersonService extends IService<Person> {
     Person getPersonById(int id);
     boolean exists(Person person);
     int addPerson(Person person);

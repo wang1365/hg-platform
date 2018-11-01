@@ -1,7 +1,7 @@
 package com.hg.web.rest;
 
-import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.hg.web.common.HgResponse;
+import com.hg.web.dto.AreaDto;
 import com.hg.web.entity.Area;
 import com.hg.web.service.AreaService;
 import java.util.List;
@@ -20,8 +20,8 @@ public class AreaController {
     private AreaService areaService;
 
     @GetMapping("/getAreaList")
-    public HgResponse<List<Area>> getAreaList() {
-        return HgResponse.success(areaService.list(new QueryWrapper<Area>()));
+    public HgResponse<List<AreaDto>> getAreaList() {
+        return HgResponse.success(areaService.listAreas());
     }
 
     @PostMapping("/updateArea")
@@ -31,8 +31,8 @@ public class AreaController {
     }
 
     @PostMapping("/addArea")
-    public HgResponse addPerson(@RequestBody Area area) {
-        return HgResponse.success(areaService.save(area));
+    public HgResponse addArea(@RequestBody AreaDto areaDto) {
+        return HgResponse.success(areaService.save(areaDto));
     }
 
 }
