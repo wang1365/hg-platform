@@ -30,4 +30,9 @@ public class AreaController {
         return HgResponse.success(area);
     }
 
+    @PostMapping("/addArea")
+    public HgResponse addPerson(@RequestBody Area area) {
+        return HgResponse.success(areaService.save(area));
+    }
+
 }
