@@ -2,13 +2,16 @@ package com.hg.web.rest;
 
 import com.hg.web.common.HgResponse;
 import com.hg.web.dto.VendingMachineDto;
+import com.hg.web.entity.VendingMachine;
 import com.hg.web.service.VendingMachineService;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
@@ -27,6 +30,13 @@ public class VendingMachineController {
     public HgResponse<VendingMachineDto> updateArea(@RequestBody VendingMachineDto machineDto) {
         vmService.updateById(machineDto);
         return HgResponse.success(machineDto);
+    }
+
+    @PostMapping("/{machineId}/enable")
+    public HgResponse enableVendingMachine(@PathVariable Integer machineId, @RequestParam Boolean enabled) {
+        VendingMachine machine = vmService.getById(machineId);
+        machine.setEnabled(enabled);
+        return HgResponse.success(vmService.updateById(machine));
     }
 
     @PostMapping("/addVm")
