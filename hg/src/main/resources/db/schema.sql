@@ -59,6 +59,23 @@ create table `area`
   `comment` varchar(1024)
 ) ENGINE = InnoDB DEFAULT CHARSET=utf8mb4;
 
+-- 售货柜
+create table `vm`
+(
+  `id` int auto_increment primary key,
+  `code` varchar(128) not null unique,
+  `device_mode` varchar(128) not null comment '设备型号',
+  `enabled` tinyint(1) not null comment '启用',
+  `run` tinyint(1) not null comment '运行状态',
+  `area_id` int,
+  `head_id` int comment '负责人',
+  `distribution_id` int comment '配送人员',
+  `address` varchar(256),
+  `longitude` float,
+  `latitude` float,
+  `comment` varchar(1024)
+) ENGINE = InnoDB DEFAULT CHARSET=utf8mb4;
+
 -- 促销
 create table `promotion`
 (

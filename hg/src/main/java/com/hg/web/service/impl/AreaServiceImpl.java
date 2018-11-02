@@ -37,11 +37,9 @@ public class AreaServiceImpl extends ServiceImpl<AreaMapper, Area> implements Ar
                 .collect(Collectors.toMap(Company::getId, Company::getName));
 
         List<Integer> headIds = areas.stream().map(Area::getHeadId).collect(Collectors.toList());
-        System.out.println(headIds);
         Map<Integer, Person> heads = personService.listByIds(headIds).stream()
                 .filter(Objects::nonNull)
                 .collect(Collectors.toMap(Person::getId, Function.identity()));
-        System.out.println(heads);
 
         return areas.stream().map(area -> {
             AreaDto dto = new AreaDto();

@@ -37,6 +37,9 @@ insert into `region` values (370783003002, '桑家庄', null, null, 370783003000
 -- 片区
 insert into `area` values (240, '北京', 1, 1, 1, '北京市北京市东城区', 116.415612, 39.909984, null);
 
+-- 售货柜
+insert into `vm` values (1, 'GLC000002274', 'HGOBOX-C700', 1, 0, 240, 1, 2, null, null, null, null);
+insert into `vm` values (2, 'GLC000002275', 'HGOBOX-C700', 1, 1, 240, 2, 1, '', 116.415612, 39.909984, null);
 
 -- 订单
 -- insert into `order` values (1, 1, '2018-09-25', 1500, 'kg', 120, '南京市雨花台区', 1, 1, 1, 1, null);
