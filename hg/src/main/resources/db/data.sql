@@ -1,7 +1,8 @@
 select 'x';
 
-insert into sys_user values (1, 'admin', 'admin123456', 'wangxiaochuan01@163.com', 1, now(), null, '2099-01-01', 0);
-insert into sys_user_role values (1, 'admin', 'ADMIN', now());
+insert into sys_user values (1, 'admin', '$2a$04$A0dCCXZo4ub2tm1MCwQSx.Ps9KaRbbUkmkKC0RdD45AfhtqOy.kEy', 'wangxiaochuan01@163.com', 1, now(), null, '2099-01-01');
+insert into sys_user values (2, 'sangjia', '$2a$04$5R22m7KPYkQ.wQg/Bm97zesZsHtrgIVa90f2hXDFlSyPfNqm7d0VS', 'wangxiaochuan01@163.com', 1, now(), null, '2099-01-01');
+
 
 -- 公司表
 insert into company values (1, '北京果龙仓兴农科技有限公司', '北京市经济开发区荣华中路7号院3号楼518', '王晓森', '18734803709');

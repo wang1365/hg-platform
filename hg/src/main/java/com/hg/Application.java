@@ -1,6 +1,6 @@
 package com.hg;
 
-import com.hg.config.QualityReportProperties;
+import com.hg.config.StorageProperties;
 import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -18,9 +18,8 @@ import org.springframework.cache.annotation.EnableCaching;
 
 @SpringBootApplication
 @EnableCaching
-@EnableConfigurationProperties({QualityReportProperties.class})
-@MapperScan({"com.hg.web.repository", "com.hg.promotion.repository"})
-
+@EnableConfigurationProperties({StorageProperties.class})
+@MapperScan({"com.hg.web.repository", "com.hg.promotion.repository", "com.hg.security.repository"})
 public class Application extends SpringBootServletInitializer {
 
     @Override

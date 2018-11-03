@@ -232,29 +232,19 @@ create table sys_role
 ) ENGINE = InnoDB DEFAULT CHARSET=utf8mb4;
 
 
-
+-- 系统用户表
 create table sys_user
 (
-  id                  int auto_increment
-    primary key,
-  name                varchar(64) unique                 not null,
-  password            varchar(256)                       not null,
-  email               varchar(256)                           null,
-  enabled             tinyint(1) default '1'                 null
-  comment '账号是否生效',
-  create_time         datetime                               null
-  comment '账号创建时间',
-  password_reset_time datetime                               null
-  comment '最近一次密码重置时间',
-  expired_time        datetime default '2099-01-01 00:00:00' not null
-  comment '账号过期时间',
-  person_id           int                                    null
-  comment '个人ID（用户资料表person）',
-  constraint user_id_uindex
-  unique (id),
-  constraint user_name_uindex
-  unique (name)
+  id                  int auto_increment    primary key,
+  user_name                varchar(64) unique     not null,
+  password            varchar(256)           not null,
+  email               varchar(256)           null,
+  enabled             tinyint(1) default '1' null  comment '账号是否生效',
+  create_time         datetime               null  comment '账号创建时间',
+  password_reset_time datetime               null  comment '最近一次密码重置时间',
+  expired_time        datetime default '2099-01-01 00:00:00' not null  comment '账号过期时间'
 ) ENGINE = InnoDB DEFAULT CHARSET=utf8mb4;
+
 
 create table sys_user_role
 (

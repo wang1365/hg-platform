@@ -1,6 +1,6 @@
 package com.hg.web.service.impl;
 
-import com.hg.config.QualityReportProperties;
+import com.hg.config.StorageProperties;
 import com.hg.web.service.StorageService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.Resource;
@@ -26,7 +26,7 @@ public class FileSystemStorageServiceImpl implements StorageService {
     private final Path rootLocation;
 
     @Autowired
-    public FileSystemStorageServiceImpl(QualityReportProperties storageProperties) {
+    public FileSystemStorageServiceImpl(StorageProperties storageProperties) {
         this.rootLocation = Paths.get(storageProperties.getUpload());
     }
 

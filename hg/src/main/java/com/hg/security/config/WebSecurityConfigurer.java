@@ -1,24 +1,30 @@
-package com.hg.config;
+package com.hg.security.config;
 
-import com.hg.security.JwtAuthenticationFilter;
-import com.hg.security.JwtLoginFilter;
+
+import com.hg.security.JwtAuthenticationEntryPoint;
+import com.hg.security.JwtAuthorizationTokenFilter;
+import com.hg.security.JwtUserDetailsService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.boot.autoconfigure.security.SecurityProperties;
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.annotation.Order;
+import org.springframework.http.HttpMethod;
+import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
-import org.springframework.boot.autoconfigure.security.SecurityProperties;
 import org.springframework.security.config.http.SessionCreationPolicy;
-import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.CorsConfigurationSource;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 
-import javax.sql.DataSource;
 
 /**
  * <b>Security configurations</b><br>
@@ -34,49 +40,40 @@ import javax.sql.DataSource;
 @Order(SecurityProperties.ACCESS_OVERRIDE_ORDER)
 public class WebSecurityConfigurer extends WebSecurityConfigurerAdapter {
     @Autowired
-    private DataSource dataSource;
+    private JwtAuthenticationEntryPoint unauthorizedHandler;
 
-//    @Autowired
-//    public void configureAuthentication(AuthenticationManagerBuilder authenticationManagerBuilder) throws Exception {
-//        authenticationManagerBuilder
-//                // 设置UserDetailsService
-//                .userDetailsService(this.userDetailsService);
-//        // 使用BCrypt进行密码的hash
-////                .passwordEncoder(passwordEncoder());
-//    }
+    @Autowired
+    private JwtUserDetailsService jwtUserDetailsService;
 
-//    @Override
-//    public UserDetailsService userDetailsService() {
-//        InMemoryUserDetailsManager manager = new InMemoryUserDetailsManager();
-//        manager.createUser(User.withUsername("admin").password("111111").roles("USER").build());
-////        manager.createUser(User.withUsername("admin").password("password").roles("USER","ADMIN").build());
-//        return manager;
-//    }
+    // Custom JWT based security filter
+    @Autowired
+    JwtAuthorizationTokenFilter authenticationTokenFilter;
 
-    @Override
-    public void configure(AuthenticationManagerBuilder auth) throws Exception {
-        useJdbcAuth(auth);
-    }
+    @Value("${jwt.header}")
+    private String tokenHeader;
 
-    private void useMemoryAuth(AuthenticationManagerBuilder auth) throws Exception {
+    @Value("${jwt.route.authentication.path}")
+    private String authenticationPath;
+
+
+
+    @Autowired
+    public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
         auth
-                .inMemoryAuthentication()
-                .withUser("admin").password("111111").roles("ADMIN");
+                .userDetailsService(jwtUserDetailsService)
+                .passwordEncoder(passwordEncoderBean());
     }
 
-    private void useJdbcAuth(AuthenticationManagerBuilder auth) throws Exception {
-        auth.jdbcAuthentication().dataSource(dataSource)
-                .usersByUsernameQuery("select name, password, enabled from sys_user where name = ?")
-                .authoritiesByUsernameQuery("select username, role_name from sys_user_role where username = ?");
+    @Bean
+    public PasswordEncoder passwordEncoderBean() {
+        return new BCryptPasswordEncoder(4);
     }
 
-
-//    @Bean
-//    public PasswordEncoder passwordEncoder() {
-//        return new BCryptPasswordEncoder();
-//    }
-//
-
+    @Bean
+    @Override
+    public AuthenticationManager authenticationManagerBean() throws Exception {
+        return super.authenticationManagerBean();
+    }
 
     private CorsConfigurationSource createCorsConfiguration() {
         UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
@@ -105,10 +102,11 @@ public class WebSecurityConfigurer extends WebSecurityConfigurerAdapter {
                 .authorizeRequests()
                 .antMatchers("/api/**", "/web/login", "/h2-console", "/h2-console/**", "/resources/**").permitAll()
                 .anyRequest().authenticated()
-                .and()
-                .addFilterBefore(new JwtLoginFilter("/web/login", authenticationManager()), UsernamePasswordAuthenticationFilter.class)
-                .addFilterBefore(new JwtAuthenticationFilter(), UsernamePasswordAuthenticationFilter.class)
+
         ;
+
+        http
+                .addFilterBefore(authenticationTokenFilter, UsernamePasswordAuthenticationFilter.class);
 
         // disable page caching
         http
@@ -121,5 +119,12 @@ public class WebSecurityConfigurer extends WebSecurityConfigurerAdapter {
     public void configure(WebSecurity web) throws Exception {
         web.ignoring()
                 .antMatchers("/api/**", "/h2-console", "/h2-console/**", "/resources/**");
+
+        web
+                .ignoring()
+                .antMatchers(
+                        HttpMethod.POST,
+                        authenticationPath
+                );
     }
 }

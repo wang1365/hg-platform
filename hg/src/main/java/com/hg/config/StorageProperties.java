@@ -14,7 +14,7 @@ import javax.validation.constraints.NotNull;
 @ConfigurationProperties("hg.static")
 @Validated
 @Data
-public class QualityReportProperties {
+public class StorageProperties {
     @NotNull
     private String upload;
 }

@@ -38,6 +38,12 @@ hg:
   static:
     upload: /root/hg/static/upload/
 
+jwt:
+  header: Authorization
+  secret: mySecret
+  expiration: 604800
+  route.authentication.path: /web/auth
+  route.authentication.refresh: /web/refresh
 
 ---
 spring:
