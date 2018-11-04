@@ -46,7 +46,7 @@ public class GoodsLabelController {
     }
 
     @PostMapping("deleteGoodsLabel")
-    HgResponse deleteGoodsLabel(int id) {
+    HgResponse deleteGoodsLabel(long id) {
         labelService.removeById(id);
         return HgResponse.success();
     }

@@ -33,7 +33,7 @@ public class VendingMachineController {
     }
 
     @PostMapping("/{machineId}/enable")
-    public HgResponse enableVendingMachine(@PathVariable Integer machineId, @RequestParam Boolean enabled) {
+    public HgResponse enableVendingMachine(@PathVariable Long machineId, @RequestParam Boolean enabled) {
         VendingMachine machine = vmService.getById(machineId);
         machine.setEnabled(enabled);
         return HgResponse.success(vmService.updateById(machine));

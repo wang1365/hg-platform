@@ -1,7 +1,5 @@
 package com.hg.web.entity;
 
-import com.baomidou.mybatisplus.annotation.IdType;
-import com.baomidou.mybatisplus.annotation.TableId;
 import lombok.Data;
 
 import java.util.Date;
@@ -12,9 +10,7 @@ import java.util.Date;
  * @description: 用户(微信、支付宝)
  */
 @Data
-public class User {
-    @TableId(value = "id", type= IdType.AUTO)
-    private Integer id;
+public class User extends BaseEntity {
     /**
      * 用户昵称
      */

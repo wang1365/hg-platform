@@ -1,12 +1,9 @@
 package com.hg.web.entity;
 
-import com.baomidou.mybatisplus.annotation.IdType;
-import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import lombok.Data;
 
 import java.math.BigDecimal;
-import java.util.Date;
 
 
 /**
@@ -16,10 +13,7 @@ import java.util.Date;
  */
 @Data
 @TableName("`order`")
-public class Order {
-    @TableId(value = "id", type= IdType.AUTO)
-    private Integer id;
-
+public class Order extends BaseEntity {
     private Integer status;
     private Integer auditStatus;
     private BigDecimal amount;

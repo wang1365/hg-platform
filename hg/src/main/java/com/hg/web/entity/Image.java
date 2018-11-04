@@ -1,7 +1,5 @@
 package com.hg.web.entity;
 
-import com.baomidou.mybatisplus.annotation.IdType;
-import com.baomidou.mybatisplus.annotation.TableId;
 import lombok.Data;
 
 import java.util.Date;
@@ -13,9 +11,7 @@ import java.util.Date;
  * @description:
  */
 @Data
-public class Image {
-    @TableId(value = "id", type= IdType.AUTO)
-    private Integer id;
+public class Image extends BaseEntity {
     private Integer catId;
     private String name;
     private String localPath;

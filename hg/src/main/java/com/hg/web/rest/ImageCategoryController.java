@@ -23,18 +23,18 @@ public class ImageCategoryController {
 
     @PostMapping("addImageCategory")
     HgResponse addImageCategory(@RequestBody ImageCategory imageCategory) {
-        service.add(imageCategory);
+        service.save(imageCategory);
         return HgResponse.success();
     }
 
     @GetMapping("getImageCategoryList")
     HgResponse<List<ImageCategory>> getImageCategoryList() {
-        return HgResponse.success(service.getAll());
+        return HgResponse.success(service.list(null));
     }
 
     @GetMapping("deleteImageCategory")
-    HgResponse deleteImageCategory(int id) {
-        service.delete(id);
+    HgResponse deleteImageCategory(long id) {
+        service.removeById(id);
         return HgResponse.success();
     }
 }

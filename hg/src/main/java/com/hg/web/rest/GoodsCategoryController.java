@@ -41,7 +41,7 @@ public class GoodsCategoryController {
     }
 
     @PostMapping("deleteGoodsCategory")
-    HgResponse deleteGoodsCategory(int id) {
+    HgResponse deleteGoodsCategory(long id) {
         Goods goods = new Goods();
         goods.setCatId(id);
         if (goodsService.getOne(new QueryWrapper<>(goods)) != null) {

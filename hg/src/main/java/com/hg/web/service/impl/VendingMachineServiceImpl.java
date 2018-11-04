@@ -31,15 +31,15 @@ public class VendingMachineServiceImpl extends ServiceImpl<VendingMachineMapper,
     @Override
     public List<VendingMachineDto> listVendingMachines() {
         List<VendingMachine> machines = this.list(null);
-        List<Integer> personIds = machines.stream()
+        List<Long> personIds = machines.stream()
                 .flatMap(m -> Stream.of(m.getHeadId(), m.getDistributionId()))
                 .collect(Collectors.toList());
-        Map<Integer, String> persons = personService.listByIds(personIds).stream()
+        Map<Long, String> persons = personService.listByIds(personIds).stream()
                 .filter(Objects::nonNull)
                 .collect(Collectors.toMap(Person::getId, Person::getName));
 
-        List<Integer> areaIds = machines.stream().map(VendingMachine::getAreaId).collect(Collectors.toList());
-        Map<Integer, String> areas = areaService.listByIds(areaIds).stream()
+        List<Long> areaIds = machines.stream().map(VendingMachine::getAreaId).collect(Collectors.toList());
+        Map<Long, String> areas = areaService.listByIds(areaIds).stream()
                 .filter(Objects::nonNull)
                 .collect(Collectors.toMap(Area::getId, Area::getName));
 

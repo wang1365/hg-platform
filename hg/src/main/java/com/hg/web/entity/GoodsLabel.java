@@ -1,7 +1,5 @@
 package com.hg.web.entity;
 
-import com.baomidou.mybatisplus.annotation.IdType;
-import com.baomidou.mybatisplus.annotation.TableId;
 import lombok.Data;
 
 import java.util.Date;
@@ -12,9 +10,7 @@ import java.util.Date;
  * @description: 商品标签
  */
 @Data
-public class GoodsLabel {
-    @TableId(type = IdType.AUTO)
-    private Integer id;
+public class GoodsLabel extends BaseEntity {
     private String barCode;
     private String labelCode;
     private Date productDate;

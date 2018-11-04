@@ -5,7 +5,8 @@ create table goods_category
 (
   id   int auto_increment   primary key,
   name varchar(256) not null unique,
-  desc varchar(1024)
+  desc varchar(1024),
+  create_time timestamp not null default current_timestamp
 ) ENGINE = InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- 商品品牌
@@ -13,7 +14,8 @@ create table goods_brand
 (
   id   int auto_increment   primary key,
   name varchar(256) not null unique,
-  desc varchar(1024)
+  desc varchar(1024),
+  create_time timestamp not null default current_timestamp
 ) ENGINE = InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- 商品信息
@@ -30,7 +32,8 @@ create table `goods`
   `weight` decimal(8,2) comment '净含量，单位g',
   `expire_days` int comment '保质期天数',
   `desc` varchar(1024),
-  `valid` tinyint(1) default true
+  `valid` tinyint(1) default true,
+  create_time timestamp not null default current_timestamp
 ) ENGINE = InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- 商品标签
@@ -56,7 +59,8 @@ create table `area`
   `address` varchar(256) comment '详细地址',
   `longitude` float comment '经度',
   `latitude` float comment '纬度',
-  `comment` varchar(1024)
+  `comment` varchar(1024),
+  create_time timestamp not null default current_timestamp
 ) ENGINE = InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- 售货柜
@@ -73,7 +77,8 @@ create table `vm`
   `address` varchar(256),
   `longitude` float,
   `latitude` float,
-  `comment` varchar(1024)
+  `comment` varchar(1024),
+  create_time timestamp not null default current_timestamp
 ) ENGINE = InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- 促销
@@ -99,7 +104,8 @@ create table `promotion_rule_first_reduction`
 (
   id int auto_increment primary key,
   promotion_id int not null unique,
-  reduce_value decimal(6, 2) not null
+  reduce_value decimal(6, 2) not null,
+  create_time timestamp not null default current_timestamp
 ) ENGINE = InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- 满减
@@ -108,7 +114,8 @@ create table `promotion_rule_full_reduction`
   id int auto_increment primary key,
   promotion_id int not null,
   full_value decimal(6,2) not null,
-  reduce_value decimal(6, 2) not null
+  reduce_value decimal(6, 2) not null,
+  create_time timestamp not null default current_timestamp
 ) ENGINE = InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- 随机立减
@@ -117,7 +124,8 @@ create table `promotion_rule_random_reduction`
   id int auto_increment primary key,
   promotion_id int not null,
   min_value decimal(6,2) not null,
-  max_value decimal(6, 2) not null
+  max_value decimal(6, 2) not null,
+  create_time timestamp not null default current_timestamp
 ) ENGINE = InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- 优惠折扣
@@ -125,7 +133,8 @@ create table `promotion_rule_discount`
 (
   id int auto_increment primary key,
   promotion_id int not null unique,
-  rate decimal(3, 2) not null comment '折扣率'
+  rate decimal(3, 2) not null comment '折扣率',
+  create_time timestamp not null default current_timestamp
 ) ENGINE = InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- 分类促销
@@ -133,7 +142,8 @@ create table promotion_category
 (
   id int auto_increment primary key,
   promotion_id int not null,
-  cat_id int not null
+  cat_id int not null,
+  create_time timestamp not null default current_timestamp
 ) ENGINE = InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- 品牌促销
@@ -141,7 +151,8 @@ create table promotion_brand
 (
   id int auto_increment primary key,
   promotion_id int not null,
-  brand_id int not null
+  brand_id int not null,
+  create_time timestamp not null default current_timestamp
 ) ENGINE = InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- 用户（下订单的用户）
@@ -167,10 +178,10 @@ create table `company`
   address varchar(256),
   owner varchar(20) comment '法人',
   telephone varchar(20),
-  constraint company_id_uindex
-  unique (id)
+  create_time timestamp not null default current_timestamp
 ) ENGINE = InnoDB DEFAULT CHARSET=utf8mb4;
 
+-- 用户订单
 create table `order`
 (
   id int auto_increment primary key,
@@ -193,22 +204,16 @@ create table `order`
 
 create table `person`
 (
-  id             int auto_increment
-    primary key,
+  id             int auto_increment   primary key,
   name           varchar(64)  not null,
   type int default 10 comment  '1-农户 2-采购商 3-司机 10-其他',
   gender         varchar(64)  null,
   birthday       date         null,
-  id_card        varchar(64)  null
-  comment '身份证',
-  family_address varchar(256) null
-  comment '家庭住址',
-  mobile_no      varchar(64)  null
-  comment '手机号码',
-  company        varchar(256) null
-  comment '公司',
-  constraint person_id_uindex
-  unique (id)
+  id_card        varchar(64)  null  comment '身份证',
+  family_address varchar(256) null  comment '家庭住址',
+  mobile_no      varchar(64)  null  comment '手机号码',
+  company        varchar(256) null  comment '公司',
+  create_time timestamp not null default current_timestamp
 ) ENGINE = InnoDB DEFAULT CHARSET=utf8mb4;
 
 CREATE TABLE `region` (
@@ -218,17 +223,14 @@ CREATE TABLE `region` (
   `code` varchar(20) DEFAULT NULL COMMENT '行政地区编号',
   `parent_id` bigint DEFAULT NULL COMMENT '地区父id',
   `level` int(2) DEFAULT NULL COMMENT '地区级别 1-省、自治区、直辖市 2-地级市、地区、自治州、盟 3-市辖区、县级市、县',
-  constraint region_id_uindex
-  unique (id)
+  create_time timestamp not null default current_timestamp
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 create table sys_role
 (
-  id   int auto_increment,
-  name varchar(64) not null
-    primary key,
-  constraint role_id_uindex
-  unique (id)
+  long   int auto_increment primary key,
+  name varchar(64) not null,
+  create_time timestamp not null default current_timestamp
 ) ENGINE = InnoDB DEFAULT CHARSET=utf8mb4;
 
 
@@ -260,7 +262,8 @@ create table `image_category` (
   profile_type tinyint not null default 0 comment '0:online 1:dev',
   local_path varchar(256) not null ,
   url_path varchar(256) not null,
-  description varchar(256)
+  description varchar(256),
+  create_time timestamp default current_timestamp
 ) engine = InnoDB DEFAULT CHARSET = utf8mb4;
 
 create table `image` (

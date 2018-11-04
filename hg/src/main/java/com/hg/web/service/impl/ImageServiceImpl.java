@@ -1,18 +1,11 @@
 package com.hg.web.service.impl;
 
-import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
-import com.hg.web.repository.ImageCategoryMapper;
+import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.hg.web.repository.ImageMapper;
-import com.hg.web.dto.ImageDTO;
 import com.hg.web.entity.Image;
-import com.hg.web.entity.ImageCategory;
 import com.hg.web.service.ImageService;
-import org.springframework.beans.BeanUtils;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
-import java.util.stream.Collectors;
 
 /**
  * @author: Xiaochuan Wang
@@ -20,43 +13,5 @@ import java.util.stream.Collectors;
  * @description:
  */
 @Service
-public class ImageServiceImpl implements ImageService {
-    @Autowired
-    private ImageMapper imageMapper;
-
-    @Autowired
-    private ImageCategoryMapper categoryMapper;
-
-    @Override
-    public Image save(Image image) {
-        imageMapper.insert(image);
-        return image;
-    }
-
-    @Override
-    public List<Image> getImageByName(String name) {
-        Image image = new Image();
-        image.setName(name);
-        QueryWrapper wrapper = new QueryWrapper(image);
-        List<Image> lt =  imageMapper.selectList(wrapper);
-        return lt;
-    }
-
-    @Override
-    public List<ImageDTO> getImageList() {
-        List<Image> images = imageMapper.selectList(null);
-        return images.stream().map(image -> {
-            ImageDTO dto = new ImageDTO();
-            BeanUtils.copyProperties(image, dto);
-            ImageCategory category = categoryMapper.selectById(image.getCatId());
-            String catName = category != null ? category.getName() : "";
-            dto.setCatName(catName);
-            return dto;
-        }).collect(Collectors.toList());
-    }
-
-    @Override
-    public void delete(int id) {
-        imageMapper.deleteById(id);
-    }
+public class ImageServiceImpl extends ServiceImpl<ImageMapper, Image> implements ImageService {
 }

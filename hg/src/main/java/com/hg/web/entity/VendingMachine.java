@@ -5,21 +5,20 @@ import lombok.Data;
 
 @Data
 @TableName("`vm`")
-public class VendingMachine {
-    private Integer id;
+public class VendingMachine extends BaseEntity {
     private String code;
     private String deviceMode;
     private Boolean enabled;
     private Boolean run;
 
     // 片区
-    private Integer areaId;
+    private Long areaId;
 
     // 负责人
-    private Integer headId;
+    private Long headId;
 
     // 配送人员
-    private Integer distributionId;
+    private Long distributionId;
 
     private String address;
     private Float longitude;

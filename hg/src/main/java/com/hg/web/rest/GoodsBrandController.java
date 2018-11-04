@@ -41,7 +41,7 @@ public class GoodsBrandController {
     }
 
     @PostMapping("deleteGoodsBrand")
-    HgResponse deleteGoodsBrand(int id) {
+    HgResponse deleteGoodsBrand(long id) {
         Goods goods = new Goods();
         goods.setBrandId(id);
         if (goodsService.getOne(new QueryWrapper<>(goods)) != null) {

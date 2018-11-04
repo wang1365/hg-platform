@@ -1,7 +1,5 @@
 package com.hg.web.entity;
 
-import com.baomidou.mybatisplus.annotation.IdType;
-import com.baomidou.mybatisplus.annotation.TableId;
 import lombok.Data;
 
 /**
@@ -10,9 +8,7 @@ import lombok.Data;
  * @description: 商品品牌
  */
 @Data
-public class GoodsBrand {
-    @TableId(type = IdType.AUTO)
-    private Integer id;
+public class GoodsBrand extends BaseEntity {
     private String name;
     private String desc;
 }

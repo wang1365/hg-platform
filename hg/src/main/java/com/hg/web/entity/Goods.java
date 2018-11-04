@@ -1,9 +1,6 @@
 package com.hg.web.entity;
 
-import com.baomidou.mybatisplus.annotation.IdType;
-import com.baomidou.mybatisplus.annotation.TableId;
 import lombok.Data;
-import lombok.EqualsAndHashCode;
 
 import java.math.BigDecimal;
 
@@ -13,13 +10,10 @@ import java.math.BigDecimal;
  * @description:
  */
 @Data
-@EqualsAndHashCode(of="id")
-public class Goods {
-    @TableId(type = IdType.AUTO)
-    private Integer id;
+public class Goods extends BaseEntity {
     private String name;
-    private Integer catId;
-    private Integer brandId;
+    private Long catId;
+    private Long brandId;
     /**
      * 条形码
      */

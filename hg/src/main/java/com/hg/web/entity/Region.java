@@ -1,7 +1,5 @@
 package com.hg.web.entity;
 
-import com.baomidou.mybatisplus.annotation.IdType;
-import com.baomidou.mybatisplus.annotation.TableId;
 import lombok.Data;
 
 /**
@@ -10,9 +8,7 @@ import lombok.Data;
  * @date 2018/8/21 16:28
  */
 @Data
-public class Region {
-    @TableId(value = "id", type= IdType.AUTO)
-    private Long id;
+public class Region extends BaseEntity {
     private String name;
     private String shortName;
     /**

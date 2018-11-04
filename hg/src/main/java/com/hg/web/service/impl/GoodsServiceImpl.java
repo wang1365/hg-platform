@@ -37,10 +37,10 @@ public class GoodsServiceImpl extends ServiceImpl<GoodsMapper, Goods> implements
     @Override
     public List<GoodsDTO> listGoodsDetail() {
         List<Goods> items = list(null);
-        List<Integer> brandIds = items.stream().map(Goods::getId).collect(Collectors.toList());
-        Map<Integer, String> brandMap = brandService.listByIds(brandIds).stream()
+        List<Long> brandIds = items.stream().map(Goods::getId).collect(Collectors.toList());
+        Map<Long, String> brandMap = brandService.listByIds(brandIds).stream()
                 .collect(Collectors.toMap(GoodsBrand::getId, GoodsBrand::getName));
-        Map<Integer, String> catMap = categoryService.listByIds(brandIds).stream()
+        Map<Long, String> catMap = categoryService.listByIds(brandIds).stream()
                 .collect(Collectors.toMap(GoodsCategory::getId, GoodsCategory::getName));
 
         return items.stream().map(goods -> {

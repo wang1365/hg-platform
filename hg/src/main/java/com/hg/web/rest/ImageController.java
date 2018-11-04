@@ -31,9 +31,6 @@ public class ImageController {
     private ImageService imageService;
 
     @Autowired
-    private ImageCategoryService categoryService;
-
-    @Autowired
     StorageService storageService;
 
     @PostMapping("/addImage")
@@ -47,10 +44,8 @@ public class ImageController {
 
         HgResponse res;
         try {
-            ImageCategory category = getImageCategory(catId);
-
-            Path root = Paths.get(category.getLocalPath());
-            String rootUrlPath = category.getUrlPath();
+            Path root = Paths.get("/home/root/hg");
+            String rootUrlPath = "";
             String urlPath = rootUrlPath.endsWith("/") ? rootUrlPath + name : rootUrlPath + "/" + name;
             Path path = storageService.store(file, root, name);
             log.info("Store image success, file: {} root: {}, name: {}", file.getOriginalFilename(), root.toString(), name);
@@ -72,38 +67,21 @@ public class ImageController {
     }
 
     @GetMapping("getImageList")
-    HgResponse<List<ImageDTO>> getImageList() {
-        List<ImageDTO> images = imageService.getImageList();
+    HgResponse<List<Image>> getImageList() {
+        List<Image> images = imageService.list(null);
         return HgResponse.success(images);
     }
 
     @PostMapping("deleteImage")
-    HgResponse deleteImage(@RequestParam int id) {
+    HgResponse deleteImage(@RequestParam long id) {
         HgResponse res;
         try {
-            imageService.delete(id);
+            imageService.removeById(id);
             res = HgResponse.success();
         } catch (Exception e) {
             log.error("deleteOrderById image faild: {}, {}", id, e);
             res = HgResponse.fail(e.getMessage());
         }
         return res;
-    }
-
-    @GetMapping("getImageByName")
-    HgResponse<List<Image>> getImageByName(@RequestParam String name) {
-        HgResponse res;
-        try {
-            res = HgResponse.success(imageService.getImageByName(name));
-        } catch (Exception e) {
-            log.error("deleteOrderById image faild: {}, {}", name, e);
-            res = HgResponse.fail(e.getMessage());
-        }
-        return res;
-    }
-
-
-    private ImageCategory getImageCategory(Integer catId) {
-        return categoryService.getImageCategory(catId);
     }
 }

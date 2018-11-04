@@ -20,21 +20,21 @@ public class CompanyController {
 
     @GetMapping("/getCompanyList")
     public HgResponse getCompanyList() {
-        return HgResponse.success(companyService.getAll());
+        return HgResponse.success(companyService.list(null));
     }
 
     @PostMapping("/addCompany")
     public HgResponse addCompany(@RequestBody Company company) {
-        return HgResponse.success(companyService.add(company));
+        return HgResponse.success(companyService.save(company));
     }
 
     @PostMapping("/updateCompany")
     public HgResponse updateCompany(@RequestBody Company company) {
-        return HgResponse.success(companyService.update(company));
+        return HgResponse.success(companyService.updateById(company));
     }
 
     @PostMapping("/deleteCompany")
-    public void deleteCompany(int id) {
-        companyService.delete(id);
+    public void deleteCompany(long id) {
+        companyService.removeById(id);
     }
 }

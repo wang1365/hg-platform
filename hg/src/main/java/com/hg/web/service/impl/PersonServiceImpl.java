@@ -19,62 +19,23 @@ import java.util.List;
  */
 @Service
 @Slf4j
-@CacheConfig(cacheNames = "person")
 public class PersonServiceImpl extends ServiceImpl<PersonMapper, Person> implements PersonService {
-
-    @Autowired
-    PersonMapper personMapper;
-
-    @Override
-    public Person getPersonById(int id) {
-        if (id <= 0) {
-            return null;
-        }
-
-        return personMapper.selectById(id);
-    }
-
     @Override
     public boolean exists(Person person) {
-        return personMapper.selectOne(new QueryWrapper<>(person)) != null;
+        return this.getOne(new QueryWrapper<>(person)) != null;
     }
 
     @Override
-    @CacheEvict(key = "#person.type")
-    public int addPerson(Person person) {
-        return personMapper.insert(person);
-    }
-
-    @Override
-    @CacheEvict(key = "#person.type")
-    public int updatePerson(Person person) {
-        return personMapper.updateById(person);
-    }
-
-    @Override
-    public List<Person> getAllPersons() {
-        log.info("read data from db");
-        return personMapper.selectList(null);
-    }
-
-    @Override
-    @Cacheable(key="#type")
     public List<Person> getPersonListByType(int type) {
         Person person = new Person();
         person.setType(type);
-        return personMapper.selectList(new QueryWrapper<>(person));
+        return list(new QueryWrapper<>(person));
     }
 
     @Override
     public List<Person> getPersonListByCompany(String companyName) {
         Person person = new Person();
         person.setCompany(companyName);
-        return personMapper.selectList(new QueryWrapper<>(person));
-    }
-
-    @Override
-    @CacheEvict(allEntries = true)
-    public void deletePerson(int id) {
-        personMapper.deleteById(id);
+        return list(new QueryWrapper<>(person));
     }
 }

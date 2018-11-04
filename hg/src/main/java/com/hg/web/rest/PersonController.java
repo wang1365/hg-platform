@@ -23,7 +23,7 @@ public class PersonController {
 
     @GetMapping("getPersonList")
     HgResponse<List<Person>> getPersonList() {
-        return HgResponse.success(personService.getAllPersons());
+        return HgResponse.success(personService.list(null));
     }
 
     @GetMapping("getPersonListByType")
@@ -47,21 +47,21 @@ public class PersonController {
         if (personService.exists(dup)) {
             res = HgResponse.fail("身份证号已经存在");
         } else {
-            res = HgResponse.success(personService.addPerson(person));
+            res = HgResponse.success(personService.save(person));
 
         }
         return res;
     }
 
     @PostMapping("deletePerson")
-    HgResponse<Person> deletePerson(@RequestParam int id) {
-        personService.deletePerson(id);
+    HgResponse<Person> deletePerson(@RequestParam long id) {
+        personService.removeById(id);
         return HgResponse.success();
     }
 
     @PostMapping("updatePerson")
     HgResponse<Person> updatePerson(@RequestBody Person person) {
-        personService.updatePerson(person);
+        personService.updateById(person);
         return HgResponse.success();
     }
 }

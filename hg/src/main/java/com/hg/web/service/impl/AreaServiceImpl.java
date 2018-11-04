@@ -32,12 +32,12 @@ public class AreaServiceImpl extends ServiceImpl<AreaMapper, Area> implements Ar
     public List<AreaDto> listAreas() {
         List<Area> areas = list(null);
 
-        List<Integer> companyIds = areas.stream().map(Area::getCompanyId).collect(Collectors.toList());
-        Map<Integer, String> companies = companyService.listByIds(companyIds).stream()
+        List<Long> companyIds = areas.stream().map(Area::getCompanyId).collect(Collectors.toList());
+        Map<Long, String> companies = companyService.listByIds(companyIds).stream()
                 .collect(Collectors.toMap(Company::getId, Company::getName));
 
-        List<Integer> headIds = areas.stream().map(Area::getHeadId).collect(Collectors.toList());
-        Map<Integer, Person> heads = personService.listByIds(headIds).stream()
+        List<Long> headIds = areas.stream().map(Area::getHeadId).collect(Collectors.toList());
+        Map<Long, Person> heads = personService.listByIds(headIds).stream()
                 .filter(Objects::nonNull)
                 .collect(Collectors.toMap(Person::getId, Function.identity()));
 
