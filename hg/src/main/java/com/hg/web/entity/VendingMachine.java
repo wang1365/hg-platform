@@ -7,6 +7,7 @@ import lombok.Data;
 @TableName("`vm`")
 public class VendingMachine extends BaseEntity {
     private String code;
+    private String name;
     private String deviceMode;
     private Boolean enabled;
     private Boolean run;

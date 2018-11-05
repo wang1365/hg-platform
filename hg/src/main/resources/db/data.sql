@@ -27,11 +27,12 @@ insert into `region` values (370700000000, '潍坊市', '潍', '370700000000', n
 
 
 -- 片区
-insert into `area` values (240, '北京', 1, 1, 1, '北京市北京市东城区', 116.415612, 39.909984, null, now());
+insert into `area` values (240, '北京市丰台区', 1, 1, 1, '北京市丰台区丽泽路60号', 116.329, 39.874, null, now());
+insert into `area` values (241, '北京市西城区', 1, 1, 2, '北京市海淀区民族大学西路62号', 116.3222, 39.955, null, now());
 
 -- 售货柜
-insert into `vm` values (1, 'GLC000002274', 'HGOBOX-C700', 1, 0, 240, 1, 2, null, null, null, null, now());
-insert into `vm` values (2, 'GLC000002275', 'HGOBOX-C700', 1, 1, 240, 2, 1, '', 116.415612, 39.909984, null, now());
+insert into `vm` values (1, '点位2274', 'GLC000002274', 'HGOBOX-C700', 1, 0, 240, 1, 2, null, null, null, null, now());
+insert into `vm` values (2, '点位2275', 'GLC000002275', 'HGOBOX-C700', 1, 1, 240, 2, 1, '', 116.415612, 39.909984, null, now());
 
 -- 订单
 -- insert into `order` values (1, 1, '2018-09-25', 1500, 'kg', 120, '南京市雨花台区', 1, 1, 1, 1, null);

@@ -67,6 +67,7 @@ create table `area`
 create table `vm`
 (
   `id` int auto_increment primary key,
+  `name` varchar(128) not null unique,
   `code` varchar(128) not null unique,
   `device_mode` varchar(128) not null comment '设备型号',
   `enabled` tinyint(1) not null comment '启用',
