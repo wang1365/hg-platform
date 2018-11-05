@@ -16,5 +16,4 @@ public class Image extends BaseEntity {
     private String name;
     private String localPath;
     private String urlPath;
-    private Date createTime;
 }

@@ -1,5 +1,6 @@
 package com.hg.web.entity;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Data;
 
 import java.util.Date;
@@ -38,6 +39,6 @@ public class User extends BaseEntity {
     /**
      * 用户注册时间
      */
+    @JsonFormat(timezone = "GMT+8", pattern = "yyyy-MM-dd hh:mm:ss")
     private Date registerTime;
-    private Date createTime;
 }

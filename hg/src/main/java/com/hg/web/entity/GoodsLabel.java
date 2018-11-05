@@ -16,5 +16,4 @@ public class GoodsLabel extends BaseEntity {
     private Date productDate;
     private Integer expireDays;
     private Integer status;
-    private Date createTime;
 }

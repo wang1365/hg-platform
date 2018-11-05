@@ -2,6 +2,7 @@ package com.hg.web.entity;
 
 import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableId;
+import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Data;
 
 import java.util.Date;
@@ -15,5 +16,6 @@ import java.util.Date;
 public class BaseEntity {
     @TableId(type = IdType.AUTO)
     Long id;
+    @JsonFormat(timezone = "GMT+8", pattern = "yyyy-MM-dd hh:mm:ss")
     Date createTime;
 }
