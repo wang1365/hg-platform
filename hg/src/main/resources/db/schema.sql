@@ -207,7 +207,7 @@ create table `person`
 (
   id             int auto_increment   primary key,
   name           varchar(64)  not null,
-  type int default 10 comment  '1-农户 2-采购商 3-司机 10-其他',
+  type int default 10 comment  '1-农户 2-采购商 3-司机 4-负责人? 5-配送员 10-其他',
   gender         varchar(64)  null,
   birthday       date         null,
   id_card        varchar(64)  null  comment '身份证',

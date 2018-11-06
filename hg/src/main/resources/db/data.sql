@@ -10,8 +10,8 @@ insert into company values (2, '寿光果龙仓电子商务有限公司', '寿�
 
 
 --- 职员表
-insert into person values (1, '于松', 10, '男', null, null, null, '1234546678', '寿光果龙仓电子商务有限公司', now());
-insert into person values (2, '尹鹏', 10, '男', null, null, null, '1234546789', '北京果龙仓兴农科技有限公司', now());
+insert into person values (1, '于松', 4, '男', null, null, null, '1234546678', '寿光果龙仓电子商务有限公司', now());
+insert into person values (2, '尹鹏', 5, '男', null, null, null, '1234546789', '北京果龙仓兴农科技有限公司', now());
 
 
 -- 用户
