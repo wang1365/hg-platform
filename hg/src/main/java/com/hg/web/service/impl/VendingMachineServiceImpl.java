@@ -1,5 +1,6 @@
 package com.hg.web.service.impl;
 
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.hg.web.dto.VendingMachineDto;
 import com.hg.web.entity.Area;
@@ -51,5 +52,12 @@ public class VendingMachineServiceImpl extends ServiceImpl<VendingMachineMapper,
             machineDto.setDistributionName(persons.get(machine.getDistributionId()));
             return machineDto;
         }).collect(Collectors.toList());
+    }
+
+    @Override
+    public List<VendingMachine> listVendingMachinesByAreaId(Long areaId) {
+        VendingMachine machine = new VendingMachine();
+        machine.setAreaId(areaId);
+        return list(new QueryWrapper<>(machine));
     }
 }

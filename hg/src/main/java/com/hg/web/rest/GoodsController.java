@@ -49,4 +49,14 @@ public class GoodsController {
         GoodsDTO dto = goodsService.selectByBarCode(barCode);
         return HgResponse.success(dto);
     }
+
+    @PostMapping("/goods/instock")
+    HgResponse instock() {
+        return HgResponse.success();
+    }
+
+    @PostMapping("/goods/outstock")
+    HgResponse outstock() {
+        return HgResponse.success();
+    }
 }

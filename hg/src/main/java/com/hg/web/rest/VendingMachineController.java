@@ -26,6 +26,11 @@ public class VendingMachineController {
         return HgResponse.success(vmService.listVendingMachines());
     }
 
+    @GetMapping("/getVmsByAreaId")
+    public HgResponse<List<VendingMachine>> getVendingMachinesByArea(@RequestParam Long areaId) {
+        return HgResponse.success(vmService.listVendingMachinesByAreaId(areaId));
+    }
+
     @PostMapping("/updateVm")
     public HgResponse<VendingMachineDto> updateArea(@RequestBody VendingMachineDto machineDto) {
         vmService.updateById(machineDto);

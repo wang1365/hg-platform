@@ -7,4 +7,5 @@ import java.util.List;
 
 public interface VendingMachineService extends IService<VendingMachine> {
     List<VendingMachineDto> listVendingMachines();
+    List<VendingMachine> listVendingMachinesByAreaId(Long areaId);
 }
