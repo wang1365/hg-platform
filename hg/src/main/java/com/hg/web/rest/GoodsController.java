@@ -2,6 +2,7 @@ package com.hg.web.rest;
 
 import com.hg.web.common.HgResponse;
 import com.hg.web.dto.GoodsDTO;
+import com.hg.web.dto.InstockDto;
 import com.hg.web.entity.Goods;
 import com.hg.web.service.GoodsService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -51,8 +52,9 @@ public class GoodsController {
     }
 
     @PostMapping("/goods/instock")
-    HgResponse instock() {
-        return HgResponse.success();
+    HgResponse instock(@RequestBody InstockDto instockDto) {
+        System.out.println(instockDto);
+        return HgResponse.success(goodsService.instock(instockDto));
     }
 
     @PostMapping("/goods/outstock")

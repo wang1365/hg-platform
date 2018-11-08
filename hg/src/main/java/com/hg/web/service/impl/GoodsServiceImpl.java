@@ -3,22 +3,21 @@ package com.hg.web.service.impl;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.hg.web.dto.GoodsDTO;
+import com.hg.web.dto.InstockDto;
+import com.hg.web.entity.Goods;
 import com.hg.web.entity.GoodsBrand;
 import com.hg.web.entity.GoodsCategory;
 import com.hg.web.repository.GoodsMapper;
-import com.hg.web.entity.Goods;
 import com.hg.web.service.GoodsBrandService;
 import com.hg.web.service.GoodsCategoryService;
 import com.hg.web.service.GoodsService;
+import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.CacheConfig;
 import org.springframework.stereotype.Service;
-
-import java.util.Collection;
-import java.util.List;
-import java.util.Map;
-import java.util.stream.Collectors;
 
 /**
  * @author wangxiaochuan
@@ -70,5 +69,10 @@ public class GoodsServiceImpl extends ServiceImpl<GoodsMapper, Goods> implements
         dto.setBrandName(brand.getName());
         dto.setCatName(cat.getName());
         return dto;
+    }
+
+    @Override
+    public boolean instock(InstockDto instockDto) {
+        return true;
     }
 }
