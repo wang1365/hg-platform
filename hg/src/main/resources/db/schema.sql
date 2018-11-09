@@ -64,7 +64,7 @@ create table `area`
 ) ENGINE = InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- 售货柜
-create table `vm`
+create table `container`
 (
   `id` int auto_increment primary key,
   `name` varchar(128) not null unique,

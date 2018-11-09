@@ -51,9 +51,9 @@ public class GoodsController {
         return HgResponse.success(dto);
     }
 
+    // 应该由配送人员提交入库操作
     @PostMapping("/goods/instock")
     HgResponse instock(@RequestBody InstockDto instockDto) {
-        System.out.println(instockDto);
         return HgResponse.success(goodsService.instock(instockDto));
     }
 

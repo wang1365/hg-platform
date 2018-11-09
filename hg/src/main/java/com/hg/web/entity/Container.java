@@ -4,8 +4,8 @@ import com.baomidou.mybatisplus.annotation.TableName;
 import lombok.Data;
 
 @Data
-@TableName("`vm`")
-public class VendingMachine extends BaseEntity {
+@TableName("`container`")
+public class Container extends BaseEntity {
     private String code;
     private String name;
     private String deviceMode;

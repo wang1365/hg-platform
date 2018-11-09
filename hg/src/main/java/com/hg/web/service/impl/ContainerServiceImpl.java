@@ -2,14 +2,14 @@ package com.hg.web.service.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import com.hg.web.dto.VendingMachineDto;
+import com.hg.web.dto.ContainerDto;
 import com.hg.web.entity.Area;
 import com.hg.web.entity.Person;
-import com.hg.web.entity.VendingMachine;
-import com.hg.web.repository.VendingMachineMapper;
+import com.hg.web.entity.Container;
+import com.hg.web.repository.ContainerMapper;
 import com.hg.web.service.AreaService;
 import com.hg.web.service.PersonService;
-import com.hg.web.service.VendingMachineService;
+import com.hg.web.service.ContainerService;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
@@ -21,7 +21,8 @@ import org.springframework.stereotype.Service;
 
 
 @Service
-public class VendingMachineServiceImpl extends ServiceImpl<VendingMachineMapper, VendingMachine> implements VendingMachineService {
+public class ContainerServiceImpl extends ServiceImpl<ContainerMapper, Container> implements
+    ContainerService {
 
     @Autowired
     private PersonService personService;
@@ -30,34 +31,34 @@ public class VendingMachineServiceImpl extends ServiceImpl<VendingMachineMapper,
     private AreaService areaService;
 
     @Override
-    public List<VendingMachineDto> listVendingMachines() {
-        List<VendingMachine> machines = this.list(null);
-        List<Long> personIds = machines.stream()
+    public List<ContainerDto> listContainers() {
+        List<Container> containers = this.list(null);
+        List<Long> personIds = containers.stream()
                 .flatMap(m -> Stream.of(m.getHeadId(), m.getDistributionId()))
                 .collect(Collectors.toList());
         Map<Long, String> persons = personService.listByIds(personIds).stream()
                 .filter(Objects::nonNull)
                 .collect(Collectors.toMap(Person::getId, Person::getName));
 
-        List<Long> areaIds = machines.stream().map(VendingMachine::getAreaId).collect(Collectors.toList());
+        List<Long> areaIds = containers.stream().map(Container::getAreaId).collect(Collectors.toList());
         Map<Long, String> areas = areaService.listByIds(areaIds).stream()
                 .filter(Objects::nonNull)
                 .collect(Collectors.toMap(Area::getId, Area::getName));
 
-        return machines.stream().map(machine -> {
-            VendingMachineDto machineDto = new VendingMachineDto();
-            BeanUtils.copyProperties(machine, machineDto);
-            machineDto.setAreaName(areas.get(machine.getAreaId()));
-            machineDto.setHeadName(persons.get(machine.getHeadId()));
-            machineDto.setDistributionName(persons.get(machine.getDistributionId()));
-            return machineDto;
+        return containers.stream().map(container -> {
+            ContainerDto containerDto = new ContainerDto();
+            BeanUtils.copyProperties(container, containerDto);
+            containerDto.setAreaName(areas.get(container.getAreaId()));
+            containerDto.setHeadName(persons.get(container.getHeadId()));
+            containerDto.setDistributionName(persons.get(container.getDistributionId()));
+            return containerDto;
         }).collect(Collectors.toList());
     }
 
     @Override
-    public List<VendingMachine> listVendingMachinesByAreaId(Long areaId) {
-        VendingMachine machine = new VendingMachine();
-        machine.setAreaId(areaId);
-        return list(new QueryWrapper<>(machine));
+    public List<Container> listContainersByAreaId(Long areaId) {
+        Container container = new Container();
+        container.setAreaId(areaId);
+        return list(new QueryWrapper<>(container));
     }
 }
