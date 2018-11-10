@@ -6,7 +6,9 @@ import com.hg.web.dto.GoodsInboundDto;
 import com.hg.web.entity.Goods;
 import com.hg.web.entity.GoodsBrand;
 import com.hg.web.entity.GoodsInbound;
+import com.hg.web.entity.GoodsInboundDetail;
 import com.hg.web.service.GoodsBrandService;
+import com.hg.web.service.GoodsInboundDetailService;
 import com.hg.web.service.GoodsInboundService;
 import com.hg.web.service.GoodsService;
 import java.util.List;
@@ -23,6 +25,9 @@ public class GoodsInboundController {
     @Autowired
     private GoodsInboundService goodsInboundService;
 
+    @Autowired
+    private GoodsInboundDetailService goodsInboundDetailService;
+
     // 应该由配送人员提交入库操作
     @PostMapping("/inbound")
     HgResponse inbound(@RequestBody GoodsInboundDto goodsInboundDto) {
@@ -32,5 +37,12 @@ public class GoodsInboundController {
     @GetMapping("/getGoodsInboundList")
     HgResponse<List<GoodsInbound>> getGoodsInboundList() {
         return HgResponse.success(goodsInboundService.list(null));
+    }
+
+    @GetMapping("/getGoodsInboundDetail")
+    HgResponse<List<GoodsInboundDetail>> getGoodsInboundDetail(long id) {
+        QueryWrapper<GoodsInboundDetail> wrapper = new QueryWrapper<>();
+        wrapper.in("inbound_id", id);
+        return HgResponse.success(goodsInboundDetailService.list(wrapper));
     }
 }

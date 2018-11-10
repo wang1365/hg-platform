@@ -64,8 +64,8 @@ create table `goods_inbound`
 -- 商品入库详情
 create table `goods_inbound_detail`
 (
-  inbound_id int auto_increment primary key,
-  goods_id int not null comment '商品ID',
+  inbound_id int,
+  bar_code varchar(56) not null comment '商品条形码',
   amount int not null comment '数量'
 ) ENGINE = InnoDB DEFAULT CHARSET=utf8mb4;
 

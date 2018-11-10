@@ -3,15 +3,12 @@ package com.hg.web.service.impl;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.hg.web.dto.GoodsDTO;
-import com.hg.web.dto.GoodsInboundDto;
 import com.hg.web.entity.Goods;
 import com.hg.web.entity.GoodsBrand;
 import com.hg.web.entity.GoodsCategory;
-import com.hg.web.entity.GoodsInbound;
 import com.hg.web.repository.GoodsMapper;
 import com.hg.web.service.GoodsBrandService;
 import com.hg.web.service.GoodsCategoryService;
-import com.hg.web.service.GoodsInboundService;
 import com.hg.web.service.GoodsService;
 import java.util.List;
 import java.util.Map;
@@ -34,9 +31,6 @@ public class GoodsServiceImpl extends ServiceImpl<GoodsMapper, Goods> implements
 
     @Autowired
     private GoodsCategoryService categoryService;
-
-    @Autowired
-    private GoodsInboundService goodsInboundService;
 
     @Override
     public List<GoodsDTO> listGoodsDetail() {
