@@ -16,5 +16,4 @@ import java.util.List;
 public interface GoodsService extends IService<Goods> {
     List<GoodsDTO> listGoodsDetail();
     GoodsDTO selectByBarCode(String barCode);
-    boolean inbound(GoodsInboundDto goodsInboundDto);
 }

@@ -4,6 +4,7 @@ import com.hg.web.common.HgResponse;
 import com.hg.web.dto.GoodsDTO;
 import com.hg.web.dto.GoodsInboundDto;
 import com.hg.web.entity.Goods;
+import com.hg.web.entity.GoodsInbound;
 import com.hg.web.service.GoodsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -51,11 +52,7 @@ public class GoodsController {
         return HgResponse.success(dto);
     }
 
-    // 应该由配送人员提交入库操作
-    @PostMapping("/goods/inbound")
-    HgResponse inbound(@RequestBody GoodsInboundDto goodsInboundDto) {
-        return HgResponse.success(goodsService.inbound(goodsInboundDto));
-    }
+
 
     @PostMapping("/goods/outbound")
     HgResponse outbound() {

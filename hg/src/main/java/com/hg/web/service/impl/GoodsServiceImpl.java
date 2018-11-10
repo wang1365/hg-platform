@@ -76,17 +76,4 @@ public class GoodsServiceImpl extends ServiceImpl<GoodsMapper, Goods> implements
         return dto;
     }
 
-    @Override
-    public boolean inbound(GoodsInboundDto goodsInboundDto) {
-        // check user type
-
-        // check/update whether to match label; RFID读取的仅仅是商品条码，还是电子标签??
-        GoodsInbound inbound = goodsInboundDto.toGoodInbound();
-        goodsInboundService.save(inbound);
-
-        // save goods inbound details
-
-
-        return true;
-    }
 }

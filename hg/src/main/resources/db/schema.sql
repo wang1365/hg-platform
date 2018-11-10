@@ -54,7 +54,6 @@ create table `goods_inbound`
 (
   id int auto_increment primary key,
   area_id int not null comment '片区',
-  person_id int not null comment '配送人员ID',
   container_code varchar(128) not null comment '售货柜编码',
   -- 状态?,
   species int not null comment '种类',

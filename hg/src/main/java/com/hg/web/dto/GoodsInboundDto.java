@@ -12,7 +12,6 @@ public class GoodsInboundDto extends GoodsInbound {
     public GoodsInbound toGoodInbound() {
         GoodsInbound inbound = new GoodsInbound();
         inbound.setContainerCode(this.getContainerCode());
-        inbound.setPersonId(this.getPersonId());
         inbound.setAreaId(this.getAreaId());
         inbound.setSpecies(Long.valueOf(this.getGoods().size()));
         inbound.setAmount(this.getGoods().values().stream().mapToLong(Long::longValue).sum());
