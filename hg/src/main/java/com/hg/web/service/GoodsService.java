@@ -2,7 +2,7 @@ package com.hg.web.service;
 
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.hg.web.dto.GoodsDTO;
-import com.hg.web.dto.InstockDto;
+import com.hg.web.dto.GoodsInboundDto;
 import com.hg.web.entity.Goods;
 
 import java.util.List;
@@ -16,5 +16,5 @@ import java.util.List;
 public interface GoodsService extends IService<Goods> {
     List<GoodsDTO> listGoodsDetail();
     GoodsDTO selectByBarCode(String barCode);
-    boolean instock(InstockDto instockDto);
+    boolean inbound(GoodsInboundDto goodsInboundDto);
 }

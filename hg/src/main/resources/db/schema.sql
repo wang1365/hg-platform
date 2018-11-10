@@ -48,6 +48,28 @@ create table `goods_label`
   create_time datetime default current_timestamp
 ) ENGINE = InnoDB DEFAULT CHARSET=utf8mb4;
 
+
+-- 商品入库
+create table `goods_inbound`
+(
+  id int auto_increment primary key,
+  area_id int not null comment '片区',
+  person_id int not null comment '配送人员ID',
+  container_code varchar(128) not null comment '售货柜编码',
+  -- 状态?,
+  species int not null comment '种类',
+  amount int not null comment '总数',
+  create_time datetime default current_timestamp
+) ENGINE = InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- 商品入库详情
+create table `goods_inbound_detail`
+(
+  inbound_id int auto_increment primary key,
+  goods_id int not null comment '商品ID',
+  amount int not null comment '数量'
+) ENGINE = InnoDB DEFAULT CHARSET=utf8mb4;
+
 -- 片区
 create table `area`
 (
