@@ -35,7 +35,7 @@ public class GoodsInboundServiceImpl extends ServiceImpl<GoodsInboundMapper, Goo
                     .map(entry -> {
                         GoodsInboundDetail detail = new GoodsInboundDetail();
                         detail.setInboundId(id);
-                        detail.setBarCode(entry.getKey());
+                        detail.setGoodsId(entry.getKey());
                         detail.setAmount(entry.getValue());
                         return detail;
                     })

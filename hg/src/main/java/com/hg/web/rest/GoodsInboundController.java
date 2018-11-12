@@ -1,16 +1,11 @@
 package com.hg.web.rest;
 
-import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.hg.web.common.HgResponse;
+import com.hg.web.dto.GoodsInboundDetailDto;
 import com.hg.web.dto.GoodsInboundDto;
-import com.hg.web.entity.Goods;
-import com.hg.web.entity.GoodsBrand;
 import com.hg.web.entity.GoodsInbound;
-import com.hg.web.entity.GoodsInboundDetail;
-import com.hg.web.service.GoodsBrandService;
 import com.hg.web.service.GoodsInboundDetailService;
 import com.hg.web.service.GoodsInboundService;
-import com.hg.web.service.GoodsService;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -40,9 +35,7 @@ public class GoodsInboundController {
     }
 
     @GetMapping("/getGoodsInboundDetail")
-    HgResponse<List<GoodsInboundDetail>> getGoodsInboundDetail(long id) {
-        QueryWrapper<GoodsInboundDetail> wrapper = new QueryWrapper<>();
-        wrapper.in("inbound_id", id);
-        return HgResponse.success(goodsInboundDetailService.list(wrapper));
+    HgResponse<List<GoodsInboundDetailDto>> getGoodsInboundDetail(long id) {
+        return HgResponse.success(goodsInboundDetailService.listDetailsById(id));
     }
 }
