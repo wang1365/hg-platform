@@ -4,8 +4,10 @@ import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.hg.web.dto.GoodsLabelDTO;
 import com.hg.web.entity.Goods;
+import com.hg.web.entity.GoodsCategory;
 import com.hg.web.entity.GoodsLabel;
 import com.hg.web.repository.GoodsLabelMapper;
+import com.hg.web.service.GoodsCategoryService;
 import com.hg.web.service.GoodsLabelService;
 import com.hg.web.service.GoodsService;
 import org.springframework.beans.BeanUtils;
@@ -26,6 +28,9 @@ public class GoodsLabelServiceImpl extends ServiceImpl<GoodsLabelMapper, GoodsLa
     @Autowired
     private GoodsService goodsService;
 
+    @Autowired
+    private GoodsCategoryService goodsCategoryService;
+
     @Override
     public List<GoodsLabelDTO> listDetail() {
         List<GoodsLabel> labels = list(null);
@@ -34,11 +39,17 @@ public class GoodsLabelServiceImpl extends ServiceImpl<GoodsLabelMapper, GoodsLa
         wrapper.in("bar_code", barCodes);
         Map<String, Goods> goodsMap = goodsService.list(wrapper).stream()
                 .collect(Collectors.toMap(Goods::getBarCode, v->v));
+        Map<Long, String> goodsCategoryMap =
+                goodsCategoryService.list(null)
+                    .stream()
+                    .collect(Collectors.toMap(GoodsCategory::getId, GoodsCategory::getName));
         return labels.stream().map(label -> {
             GoodsLabelDTO dto = new GoodsLabelDTO();
             BeanUtils.copyProperties(label, dto);
             Goods goods = goodsMap.get(label.getBarCode());
             BeanUtils.copyProperties(goods, dto);
+            dto.setGoodsName(goods.getName());
+            dto.setCatName(goodsCategoryMap.get(goods.getCatId()));
             return dto;
         }).collect(Collectors.toList());
     }

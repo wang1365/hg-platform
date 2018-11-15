@@ -1,6 +1,7 @@
 package com.hg.web.dto;
 
 import com.hg.web.entity.Goods;
+import com.hg.web.entity.GoodsLabel;
 import lombok.Data;
 
 import java.math.BigDecimal;
@@ -11,7 +12,7 @@ import java.math.BigDecimal;
  * @description:
  */
 @Data
-public class GoodsLabelDTO extends Goods {
+public class GoodsLabelDTO extends GoodsLabel {
     private String goodsName;
     private String unit;
     private BigDecimal weight;
