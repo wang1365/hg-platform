@@ -40,7 +40,7 @@ create table `goods`
 create table `goods_label`
 (
   id int auto_increment primary key,
-  bar_code varchar(56) not null  comment '条形码' unique,
+  bar_code varchar(56) not null  comment '条形码',
   label_code varchar(128) not null comment '标签码(RFID)',
   product_date datetime not null comment '生产日期',
   expire_days int not null,

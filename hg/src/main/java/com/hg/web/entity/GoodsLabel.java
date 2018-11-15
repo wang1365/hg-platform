@@ -12,7 +12,7 @@ import java.util.Date;
 @Data
 public class GoodsLabel extends BaseEntity {
     private String barCode;
-    private String labelCode;
+    private String labelCode;  // 单个或多个，以逗号或换行隔开
     private Date productDate;
     private Integer expireDays;
     private Integer status;

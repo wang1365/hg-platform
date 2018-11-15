@@ -2,9 +2,13 @@ package com.hg.web.rest;
 
 import com.hg.web.common.HgResponse;
 import com.hg.web.dto.GoodsLabelDTO;
+import com.hg.web.entity.Goods;
 import com.hg.web.entity.GoodsLabel;
 import com.hg.web.service.GoodsLabelService;
 import com.hg.web.service.GoodsService;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -31,11 +35,22 @@ public class GoodsLabelController {
 
     @PostMapping("addGoodsLabel")
     HgResponse addGoodsLabel(@RequestBody GoodsLabel goodsLabel) {
-        if (goodsService.selectByBarCode(goodsLabel.getBarCode()) != null) {
-            return HgResponse.fail("该条形码已经添加过标签");
-        }
+//        if (goodsService.selectByBarCode(goodsLabel.getBarCode()) != null) {
+//            return HgResponse.fail("该条形码已经添加过标签");
+//        }
+        List<GoodsLabel> goodsLabels =
+            Stream.of(goodsLabel.getLabelCode().split(",|\n"))
+                .distinct()
+                // .filter by other conditions
+                .map(labelCode -> {
+                    GoodsLabel label = new GoodsLabel();
+                    BeanUtils.copyProperties(goodsLabel, label);
+                    label.setLabelCode(labelCode);
+                    return label;
+                })
+                .collect(Collectors.toList());
 
-        labelService.save(goodsLabel);
+        labelService.saveBatch(goodsLabels);
         return HgResponse.success();
     }
 
