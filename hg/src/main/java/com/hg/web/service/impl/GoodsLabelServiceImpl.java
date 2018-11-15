@@ -47,7 +47,7 @@ public class GoodsLabelServiceImpl extends ServiceImpl<GoodsLabelMapper, GoodsLa
             GoodsLabelDTO dto = new GoodsLabelDTO();
             BeanUtils.copyProperties(label, dto);
             Goods goods = goodsMap.get(label.getBarCode());
-            BeanUtils.copyProperties(goods, dto);
+            BeanUtils.copyProperties(goods, dto, "id");
             dto.setGoodsName(goods.getName());
             dto.setCatName(goodsCategoryMap.get(goods.getCatId()));
             return dto;
