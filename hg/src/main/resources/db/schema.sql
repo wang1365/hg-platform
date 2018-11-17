@@ -44,7 +44,7 @@ create table `goods_label`
   label_code varchar(128) not null comment '标签码(RFID)',
   product_date datetime not null comment '生产日期',
   expire_days int not null,
-  status int not null default 0,
+  status int not null default 0, -- 0/待入库, 1/已入库, 2/已出库, 3/已售,
   create_time datetime default current_timestamp
 ) ENGINE = InnoDB DEFAULT CHARSET=utf8mb4;
 
@@ -55,7 +55,7 @@ create table `goods_inbound`
   id int auto_increment primary key,
   area_id int not null comment '片区',
   container_code varchar(128) not null comment '售货柜编码',
-  -- 状态?,
+  -- 状态?, -- 审核状态?
   species int not null comment '种类',
   amount int not null comment '总数',
   create_time datetime default current_timestamp
