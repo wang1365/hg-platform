@@ -52,10 +52,4 @@ public class GoodsController {
         return HgResponse.success(dto);
     }
 
-
-
-    @PostMapping("/goods/outbound")
-    HgResponse outbound() {
-        return HgResponse.success();
-    }
 }
