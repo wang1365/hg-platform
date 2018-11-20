@@ -3,7 +3,6 @@ package com.hg.web.rest;
 import com.hg.web.common.HgResponse;
 import com.hg.web.dto.GoodsInboundDetailDto;
 import com.hg.web.dto.GoodsInboundDto;
-import com.hg.web.entity.GoodsInbound;
 import com.hg.web.service.GoodsInboundDetailService;
 import com.hg.web.service.GoodsInboundService;
 import java.util.List;
@@ -30,8 +29,8 @@ public class GoodsInboundController {
     }
 
     @GetMapping("/getGoodsInboundList")
-    HgResponse<List<GoodsInbound>> getGoodsInboundList() {
-        return HgResponse.success(goodsInboundService.list(null));
+    HgResponse<List<GoodsInboundDto>> getGoodsInboundList() {
+        return HgResponse.success(goodsInboundService.listDetail());
     }
 
     @GetMapping("/getGoodsInboundDetail")

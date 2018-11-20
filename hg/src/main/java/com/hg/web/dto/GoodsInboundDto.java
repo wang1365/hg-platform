@@ -7,6 +7,10 @@ import lombok.Data;
 @Data
 public class GoodsInboundDto extends GoodsInbound {
 
+    private String areaName;
+    private String containerName;
+    private String containerCode;
+
     private Map<Long, Long> goods;
 
     public GoodsInbound toGoodInbound() {
