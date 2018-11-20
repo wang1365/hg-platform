@@ -2,7 +2,6 @@ package com.hg.web.rest;
 
 import com.hg.web.common.HgResponse;
 import com.hg.web.dto.GoodsOutboundDto;
-import com.hg.web.entity.GoodsOutbound;
 import com.hg.web.service.GoodsOutboundService;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,8 +26,8 @@ public class GoodsOutboundController {
     }
 
     @GetMapping("/getGoodsOutboundList")
-    HgResponse<List<GoodsOutbound>> getGoodsOutboundList() {
-        return HgResponse.success(goodsOutboundService.list(null));
+    HgResponse<List<GoodsOutboundDto>> getGoodsOutboundList() {
+        return HgResponse.success(goodsOutboundService.listDetail());
     }
 
 }
