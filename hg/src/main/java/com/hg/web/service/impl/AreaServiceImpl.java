@@ -33,23 +33,29 @@ public class AreaServiceImpl extends ServiceImpl<AreaMapper, Area> implements Ar
         List<Area> areas = list(null);
 
         List<Long> companyIds = areas.stream().map(Area::getCompanyId).collect(Collectors.toList());
-        Map<Long, String> companies = companyService.listByIds(companyIds).stream()
-                .collect(Collectors.toMap(Company::getId, Company::getName));
+        Map<Long, String> companies =
+                companyService.listByIds(companyIds)
+                    .stream()
+                    .collect(Collectors.toMap(Company::getId, Company::getName));
 
         List<Long> headIds = areas.stream().map(Area::getHeadId).collect(Collectors.toList());
-        Map<Long, Person> heads = personService.listByIds(headIds).stream()
-                .filter(Objects::nonNull)
-                .collect(Collectors.toMap(Person::getId, Function.identity()));
+        Map<Long, Person> heads =
+                personService.listByIds(headIds)
+                    .stream()
+                    .filter(Objects::nonNull)
+                    .collect(Collectors.toMap(Person::getId, Function.identity()));
 
-        return areas.stream().map(area -> {
-            AreaDto dto = new AreaDto();
-            BeanUtils.copyProperties(area, dto);
-            dto.setCompanyName(companies.get(area.getCompanyId()));
-            if (Objects.nonNull(area.getHeadId())) {
-                dto.setHeadName(heads.get(area.getHeadId()).getName());
-                dto.setHeadPhone(heads.get(area.getHeadId()).getMobileNo());
-            }
-            return dto;
-        }).collect(Collectors.toList());
+        return areas.stream()
+                    .map(area -> {
+                        AreaDto dto = new AreaDto();
+                        BeanUtils.copyProperties(area, dto);
+                        dto.setCompanyName(companies.get(area.getCompanyId()));
+                        if (Objects.nonNull(area.getHeadId())) {
+                            dto.setHeadName(heads.get(area.getHeadId()).getName());
+                            dto.setHeadPhone(heads.get(area.getHeadId()).getMobileNo());
+                        }
+                        return dto;
+                    })
+                    .collect(Collectors.toList());
     }
 }

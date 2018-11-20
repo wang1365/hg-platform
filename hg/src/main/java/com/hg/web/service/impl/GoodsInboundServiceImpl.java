@@ -36,22 +36,22 @@ public class GoodsInboundServiceImpl extends ServiceImpl<GoodsInboundMapper, Goo
     public List<GoodsInboundDto> listDetail() {
         List<GoodsInbound> inbounds = this.list(null);
         Map<Long, String> areaNames =
-            areaService.listAreas()
-                .stream()
-                .collect(Collectors.toMap(Area::getId, Area::getName));
+                areaService.listAreas()
+                    .stream()
+                    .collect(Collectors.toMap(Area::getId, Area::getName));
         Map<String, String> containerNames =
-            containerService.listContainers()
-                .stream()
-                .collect(Collectors.toMap(Container::getCode, Container::getName));
+                containerService.listContainers()
+                    .stream()
+                    .collect(Collectors.toMap(Container::getCode, Container::getName));
         return inbounds.stream()
-            .map(inbound -> {
-                GoodsInboundDto dto = new GoodsInboundDto();
-                BeanUtils.copyProperties(inbound, dto);
-                dto.setAreaName(areaNames.get(inbound.getAreaId()));
-                dto.setContainerName(containerNames.get(inbound.getContainerCode()));
-                return dto;
-            })
-            .collect(Collectors.toList());
+                .map(inbound -> {
+                    GoodsInboundDto dto = new GoodsInboundDto();
+                    BeanUtils.copyProperties(inbound, dto);
+                    dto.setAreaName(areaNames.get(inbound.getAreaId()));
+                    dto.setContainerName(containerNames.get(inbound.getContainerCode()));
+                    return dto;
+                })
+                .collect(Collectors.toList());
     }
 
     @Override

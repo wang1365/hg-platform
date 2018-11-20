@@ -29,19 +29,20 @@ public class GoodsInboundDetailServiceImpl extends ServiceImpl<GoodsInboundDetai
         wrapper.in("inbound_id", id);
         List<GoodsInboundDetail> details = this.list(wrapper);
         List<Long> goodsIds = details.stream()
-                                    .map(GoodsInboundDetail::getGoodsId).collect(Collectors.toList());
+                    .map(GoodsInboundDetail::getGoodsId)
+                    .collect(Collectors.toList());
         Map<Long, Goods> map = goodsService.listByIds(goodsIds)
-                                    .stream()
-                                    .collect(
-                                        Collectors.toMap(Goods::getId, Function.identity()));
+                    .stream()
+                    .collect(
+                        Collectors.toMap(Goods::getId, Function.identity()));
         return details.stream()
-                        .map(detail -> {
-                           GoodsInboundDetailDto dto = new GoodsInboundDetailDto();
-                            BeanUtils.copyProperties(detail, dto);
-                            dto.setGoodsBarCode(map.get(detail.getGoodsId()).getBarCode());
-                            dto.setGoodsName(map.get(detail.getGoodsId()).getName());
-                            return dto;
-                        })
-                        .collect(Collectors.toList());
+                    .map(detail -> {
+                        GoodsInboundDetailDto dto = new GoodsInboundDetailDto();
+                        BeanUtils.copyProperties(detail, dto);
+                        dto.setGoodsBarCode(map.get(detail.getGoodsId()).getBarCode());
+                        dto.setGoodsName(map.get(detail.getGoodsId()).getName());
+                        return dto;
+                    })
+                    .collect(Collectors.toList());
     }
 }
