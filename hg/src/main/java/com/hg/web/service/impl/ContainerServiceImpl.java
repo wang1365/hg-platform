@@ -10,6 +10,8 @@ import com.hg.web.repository.ContainerMapper;
 import com.hg.web.service.AreaService;
 import com.hg.web.service.PersonService;
 import com.hg.web.service.ContainerService;
+
+import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
@@ -18,6 +20,7 @@ import java.util.stream.Stream;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.util.CollectionUtils;
 
 
 @Service
@@ -37,6 +40,9 @@ public class ContainerServiceImpl extends ServiceImpl<ContainerMapper, Container
                 containers.stream()
                     .flatMap(m -> Stream.of(m.getHeadId(), m.getDistributionId()))
                     .collect(Collectors.toList());
+        if (CollectionUtils.isEmpty(personIds)) {
+            return Collections.emptyList();
+        }
         Map<Long, String> persons =
             personService.listByIds(personIds)
                     .stream()
