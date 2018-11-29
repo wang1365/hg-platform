@@ -5,7 +5,7 @@ create table goods_category
 (
   id   int auto_increment   primary key,
   name varchar(256) not null unique,
-  desc varchar(1024),
+  comment varchar(1024),
   create_time timestamp not null default current_timestamp
 ) ENGINE = InnoDB DEFAULT CHARSET=utf8mb4;
 
@@ -14,7 +14,7 @@ create table goods_brand
 (
   id   int auto_increment   primary key,
   name varchar(256) not null unique,
-  desc varchar(1024),
+  comment varchar(1024),
   create_time timestamp not null default current_timestamp
 ) ENGINE = InnoDB DEFAULT CHARSET=utf8mb4;
 
@@ -137,7 +137,7 @@ create table `promotion`
   include_all_brand tinyint(1) not null default false comment '是否所有商品品牌都参加',
   include_all_hg tinyint(1) not null default false comment '是否所有货柜都参加',
   audited tinyint(1) not null default false comment '是否审核',
-  desc varchar(1028),
+  comment varchar(1028),
   create_time datetime not null default current_timestamp
 ) ENGINE = InnoDB DEFAULT CHARSET=utf8mb4;
 
