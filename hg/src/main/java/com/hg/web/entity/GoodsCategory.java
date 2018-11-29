@@ -10,5 +10,5 @@ import lombok.Data;
 @Data
 public class GoodsCategory extends BaseEntity {
     private String name;
-    private String desc;
+    private String comment;
 }

@@ -38,6 +38,6 @@ public class Goods extends BaseEntity {
      * 保质期天数
      */
     private Integer expireDays;
-    private String desc;
+    private String comment;
     private Boolean valid;
 }
