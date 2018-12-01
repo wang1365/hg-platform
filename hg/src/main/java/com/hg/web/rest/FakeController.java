@@ -1,14 +1,11 @@
 package com.hg.web.rest;
 
 import com.hg.web.common.HgResponse;
-import com.hg.web.entity.Fake;
+import com.hg.web.entity.FakeTotal;
 import com.hg.web.service.FakeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.util.CollectionUtils;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -24,14 +21,14 @@ public class FakeController {
     private FakeService fakeService;
 
     @GetMapping("/getFake")
-    HgResponse<Fake> getFake() {
-        List<Fake> fakeList = fakeService.list(null);
-        Fake fake = CollectionUtils.isEmpty(fakeList) ? null : fakeList.get(0);
+    public HgResponse<FakeTotal> getFake() {
+        List<FakeTotal> fakeList = fakeService.list(null);
+        FakeTotal fake = CollectionUtils.isEmpty(fakeList) ? null : fakeList.get(0);
         return HgResponse.success(fake);
     }
 
     @PostMapping("/updateFake")
-    HgResponse updateFake(Fake fake) {
+    public HgResponse updateFake(@RequestBody FakeTotal fake) {
         fakeService.updateById(fake);
         return HgResponse.success();
     }

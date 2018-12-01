@@ -1,6 +1,6 @@
 package com.hg.job;
 
-import com.hg.web.entity.Fake;
+import com.hg.web.entity.FakeTotal;
 import com.hg.web.service.FakeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Scheduled;
@@ -22,7 +22,7 @@ public class FakeJob {
     @Scheduled(fixedRate = 10*1000L)
     void fakeEverything() {
         Random random = new Random();
-        Fake fake = fakeService.getById(1);
+        FakeTotal fake = fakeService.getById(1);
         BigDecimal delta = new BigDecimal(Math.random()*10);
         fake.setTotalSaleAmount(fake.getTotalSaleAmount().add(delta));
         fake.setTodaySaleCount(fake.getTotalSaleCount() + random.nextInt(2)+1);
@@ -33,7 +33,7 @@ public class FakeJob {
 
     @Scheduled(initialDelay = 2*1000, fixedRate = 10*1000L)
     void fakeUser() {
-        Fake fake = fakeService.getById(1);
+        FakeTotal fake = fakeService.getById(1);
         fake.setUserCount(fake.getUserCount() + 1);
 
         fakeService.updateById(fake);

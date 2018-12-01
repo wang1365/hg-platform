@@ -10,7 +10,7 @@ import java.math.BigDecimal;
  * description:
  */
 @Data
-public class Fake extends BaseEntity {
+public class FakeTotal extends BaseEntity {
     private BigDecimal totalSaleAmount;
     private Integer totalSaleCount;
     private BigDecimal todaySaleAmount;

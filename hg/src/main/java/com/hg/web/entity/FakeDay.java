@@ -11,7 +11,7 @@ import java.util.Date;
  * description:
  */
 @Data
-public class FakeDailyReport extends BaseEntity {
+public class FakeDay extends BaseEntity {
     private Date day;
     private BigDecimal saleAmount;
     private Integer saleCount;

@@ -1,23 +1,18 @@
 package com.hg.web.rest;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
-import com.baomidou.mybatisplus.core.metadata.TableFieldInfo;
 import com.hg.web.common.HgResponse;
-import com.hg.web.entity.FakeDailyReport;
+import com.hg.web.entity.FakeDay;
 import com.hg.web.service.FakeDailyReportService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.format.annotation.DateTimeFormat;
+import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDate;
-import java.time.Month;
 import java.time.ZoneId;
 import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
-import java.util.function.Predicate;
 
 /**
  * author: Xiaochuan Wang
@@ -26,12 +21,12 @@ import java.util.function.Predicate;
  */
 @RestController
 @RequestMapping("/web/fake/")
-public class FakeDailyReportController {
+public class FakeDayController {
     @Autowired
     private FakeDailyReportService fakeDailyReportService;
 
     @GetMapping("/getFakeDailyReport")
-    HgResponse getFakeDailyReport() {
+    public HgResponse getFakeDailyReport() {
         QueryWrapper wrapper1 = new QueryWrapper();
         LocalDate today = LocalDate.now();
         LocalDate monthStart = today.withDayOfMonth(1);
@@ -46,23 +41,40 @@ public class FakeDailyReportController {
 
         wrapper1.between("day", d1, d2);
         wrapper1.orderByAsc("day");
-        List<FakeDailyReport> fakeList1 = fakeDailyReportService.list(wrapper1);
+        List<FakeDay> fakeList1 = fakeDailyReportService.list(wrapper1);
 
         QueryWrapper wrapper2 = new QueryWrapper();
         wrapper2.between("day", d3, d4);
         wrapper2.orderByAsc("day");
-        List<FakeDailyReport> fakeList2 = fakeDailyReportService.list(wrapper2);
-        return HgResponse.success(Arrays.asList(fakeList1, fakeList2));
+        List<FakeDay> fakeList2 = fakeDailyReportService.list(wrapper2);
+        return HgResponse.success(Arrays.asList(fakeList2,fakeList1));
     }
 
-    @PostMapping("/updateFakeDailyReport")
-    HgResponse updateFakeDailyReport(FakeDailyReport fake) {
+
+    @GetMapping("/getFakeDayList")
+    public HgResponse getFakeDayList() {
+        QueryWrapper wrapper1 = new QueryWrapper();
+        wrapper1.orderByDesc("day");
+        return HgResponse.success(fakeDailyReportService.list(wrapper1));
+    }
+
+    @GetMapping("/getFakeDayByDay")
+    public HgResponse<FakeDay> getFakeDayByDat(@RequestParam @DateTimeFormat(pattern="yyyy-MM-dd") Date day) {
+        FakeDay condition = new FakeDay();
+        condition.setDay(day);
+        QueryWrapper wrapper= new QueryWrapper(condition);
+
+        return HgResponse.success(fakeDailyReportService.getOne(wrapper));
+    }
+
+    @PostMapping("/updateFakeDay")
+    public HgResponse updateFakeDailyReport(@RequestBody FakeDay fake) {
         fakeDailyReportService.updateById(fake);
         return HgResponse.success();
     }
 
-    @PostMapping("/addFakeDailyReport")
-    HgResponse addFakeDailyReport(FakeDailyReport fake) {
+    @PostMapping("/addFakeDay")
+    public HgResponse addFakeDay(@RequestBody  FakeDay fake) {
         fakeDailyReportService.save(fake);
         return HgResponse.success();
     }
