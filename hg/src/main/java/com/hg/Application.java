@@ -8,6 +8,7 @@ import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.boot.web.support.SpringBootServletInitializer;
 import org.springframework.cache.annotation.EnableCaching;
+import org.springframework.scheduling.annotation.EnableScheduling;
 
 
 /**
@@ -20,6 +21,7 @@ import org.springframework.cache.annotation.EnableCaching;
 @EnableCaching
 @EnableConfigurationProperties({StorageProperties.class})
 @MapperScan({"com.hg.web.repository", "com.hg.promotion.repository", "com.hg.security.repository"})
+@EnableScheduling
 public class Application extends SpringBootServletInitializer {
 
     @Override

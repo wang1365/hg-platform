@@ -15,4 +15,6 @@ public class FakeDailyReport extends BaseEntity {
     private Date day;
     private BigDecimal saleAmount;
     private Integer saleCount;
+    private Integer userCount;
+    private Integer saleWeight;
 }

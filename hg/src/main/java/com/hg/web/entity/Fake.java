@@ -18,4 +18,5 @@ public class Fake extends BaseEntity {
     private Integer userCount;
     private Integer onlineDeviceCount;
     private Integer offlineDeviceCount;
+    private Integer totalWeight;
 }
