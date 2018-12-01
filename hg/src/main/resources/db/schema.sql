@@ -316,3 +316,23 @@ create table `image` (
   url_path varchar(1024) not null,
   create_time timestamp default current_timestamp
 ) engine = InnoDB DEFAULT CHARSET = utf8mb4;
+
+create table `fake` (
+  id integer auto_increment primary key ,
+  total_sale_amount decimal(10,2),
+  total_sale_count int,
+  today_sale_amount decimal(10,2),
+  today_sale_count int,
+  user_count int,
+  online_device_count int,
+  offline_device_count int,
+  create_time timestamp default current_timestamp
+) engine = InnoDB DEFAULT CHARSET = utf8mb4;
+
+create table `fake_daily_report` (
+  id integer auto_increment primary key ,
+  day datetime not null,
+  sale_amount decimal(10,2),
+  sale_count int,
+  create_time timestamp default current_timestamp
+) engine = InnoDB DEFAULT CHARSET = utf8mb4;

@@ -1,11 +1,10 @@
 package com.hg.web.rest;
 
-import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.hg.web.common.HgResponse;
 import com.hg.web.dto.OrderDTO;
 import com.hg.web.entity.Order;
-import com.hg.web.repository.OrderMapper;
 import com.hg.web.service.OrderService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -19,6 +18,7 @@ import java.util.List;
 @RequestMapping("/web/order/")
 @SuppressWarnings("unused")
 public class OrderController {
+    @Autowired
     private OrderService orderService;
 
     public OrderController(OrderService orderService) {
@@ -26,8 +26,8 @@ public class OrderController {
     }
 
     @GetMapping("getOrderList")
-    HgResponse<List<Order>> getOrderList() {
-        List<Order> orders = orderService.list(null);
+    HgResponse<List<OrderDTO>> getOrderList() {
+        List<OrderDTO> orders = orderService.getOrderDTOList();
         return HgResponse.success(orders);
     }
 

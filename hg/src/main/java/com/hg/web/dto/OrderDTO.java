@@ -11,10 +11,7 @@ import lombok.Data;
 
 @Data
 public class OrderDTO extends Order {
-    private String reportTitle;
     private String goodsName;
-    private String sellerName;
-    private String buyerName;
-
-    private String summary;
+    private String pointName;
+    private String areaName;
 }

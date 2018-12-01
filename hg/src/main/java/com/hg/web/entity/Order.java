@@ -18,4 +18,7 @@ public class Order extends BaseEntity {
     private Integer auditStatus;
     private BigDecimal amount;
     private BigDecimal reduceAmount;
+    private Integer areaId;
+    private String userName;
+    private Integer goodsId;
 }

@@ -1,7 +1,10 @@
 package com.hg.web.service;
 
 import com.baomidou.mybatisplus.extension.service.IService;
+import com.hg.web.dto.OrderDTO;
 import com.hg.web.entity.Order;
+
+import java.util.List;
 
 
 /**
@@ -10,4 +13,5 @@ import com.hg.web.entity.Order;
  * @description:
  */
 public interface OrderService extends IService<Order> {
+    List<OrderDTO> getOrderDTOList();
 }
