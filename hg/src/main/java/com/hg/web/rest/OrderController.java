@@ -25,7 +25,7 @@ public class OrderController {
         this.orderService = orderService;
     }
 
-    @GetMapping("getOrderList")
+    @GetMapping("getOrderDTOList")
     HgResponse<List<OrderDTO>> getOrderList() {
         List<OrderDTO> orders = orderService.getOrderDTOList();
         return HgResponse.success(orders);
