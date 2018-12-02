@@ -25,7 +25,7 @@ public class FakeJob {
         FakeTotal fake = fakeService.getById(1);
         BigDecimal delta = new BigDecimal(Math.random()*10);
         fake.setTotalSaleAmount(fake.getTotalSaleAmount().add(delta));
-        fake.setTodaySaleCount(fake.getTotalSaleCount() + random.nextInt(2)+1);
+        fake.setTotalSaleCount(fake.getTotalSaleCount() + random.nextInt(2)+1);
         fake.setTotalWeight(fake.getTotalWeight() + random.nextInt(2)+1);
 
         fakeService.updateById(fake);
