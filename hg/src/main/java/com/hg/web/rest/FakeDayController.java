@@ -78,4 +78,10 @@ public class FakeDayController {
         fakeDailyReportService.save(fake);
         return HgResponse.success();
     }
+
+    @PostMapping("/deleteFakeDay")
+    public HgResponse deleteFakeDay(@RequestParam long id) {
+        fakeDailyReportService.removeById(id);
+        return HgResponse.success();
+    }
 }
