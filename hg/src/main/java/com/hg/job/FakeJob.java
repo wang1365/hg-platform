@@ -14,7 +14,7 @@ import java.util.Random;
  * @date: 2018/12/1 11:00
  * @description:
  */
-@Service
+// @Service
 public class FakeJob {
     @Autowired
     private FakeService fakeService;
